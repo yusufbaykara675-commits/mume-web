@@ -45,13 +45,16 @@ async function main() {
   const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const password = process.env.ADMIN_PASSWORD;
   if (email && password) {
-    if (password.length < 10) throw new Error("ADMIN_PASSWORD en az 10 karakter olmalı.");
+    if (password.length < 10) {
+      console.warn("! ADMIN_PASSWORD en az 10 karakter olmalı — yönetici oluşturulmadı.");
+    } else {
     const exists = await prisma.adminUser.findUnique({ where: { email } });
     if (!exists) {
       await prisma.adminUser.create({ data: { email, name: "MuMê Yönetici", passwordHash: await bcrypt.hash(password, 12) } });
       console.log(`✔ Yönetici oluşturuldu: ${email}`);
     } else {
       console.log(`• Yönetici zaten var: ${email}`);
+    }
     }
   } else {
     console.warn("! ADMIN_EMAIL / ADMIN_PASSWORD tanımlı değil — yönetici oluşturulmadı.");

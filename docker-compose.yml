@@ -25,6 +25,7 @@ services:
     env_file: .env
     environment:
       DATABASE_URL: postgresql://mume:${POSTGRES_PASSWORD}@db:5432/mume?schema=public
+      DATABASE_URL_UNPOOLED: postgresql://mume:${POSTGRES_PASSWORD}@db:5432/mume?schema=public
       STORAGE_DRIVER: local
       UPLOAD_DIR: /app/uploads
     volumes:

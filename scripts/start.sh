@@ -1,6 +1,7 @@
 #!/bin/sh
 # Sunucu başlarken veritabanı şemasını günceller, ardından siteyi başlatır.
 set -e
+export DATABASE_URL_UNPOOLED="${DATABASE_URL_UNPOOLED:-$DATABASE_URL}"
 
 if [ -d prisma/migrations ] && [ "$(ls -A prisma/migrations 2>/dev/null)" ]; then
   echo "▶ Veritabanı geçişleri uygulanıyor (prisma migrate deploy)…"

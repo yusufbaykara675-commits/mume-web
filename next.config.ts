@@ -24,7 +24,11 @@ const nextConfig: NextConfig = {
   eslint: { ignoreDuringBuilds: true },
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: mediaHost ? [{ protocol: "https", hostname: mediaHost }] : [],
+    remotePatterns: [
+      // Vercel Blob (panelden yüklenen fotoğraflar)
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
+      ...(mediaHost ? [{ protocol: "https" as const, hostname: mediaHost }] : []),
+    ],
   },
   experimental: {
     serverActions: { bodySizeLimit: "60mb" },

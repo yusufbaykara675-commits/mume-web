@@ -4,6 +4,7 @@ import { mkdir, writeFile, unlink } from "fs/promises";
 import path from "path";
 import sharp from "sharp";
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { put as blobPut, del as blobDel } from "@vercel/blob";
 
 /**
  * Görsel yükleme katmanı.
@@ -20,7 +21,9 @@ export class UploadError extends Error {
 }
 
 function driver() {
-  return (process.env.STORAGE_DRIVER || "local").toLowerCase();
+  const explicit = (process.env.STORAGE_DRIVER || "").toLowerCase();
+  if (explicit) return explicit;
+  return process.env.BLOB_READ_WRITE_TOKEN ? "blob" : "local";
 }
 
 function uploadDir() {
@@ -62,6 +65,16 @@ export async function saveImage(file: File, folder = "genel"): Promise<string> {
   const safeFolder = folder.replace(/[^a-z0-9-]/gi, "").toLowerCase() || "genel";
   const key = `${safeFolder}/${new Date().getFullYear()}/${randomUUID()}.webp`;
 
+  if (driver() === "blob") {
+    const res = await blobPut(key, output, {
+      access: "public",
+      contentType: "image/webp",
+      addRandomSuffix: false,
+      cacheControlMaxAge: 31536000,
+    });
+    return res.url;
+  }
+
   if (driver() === "s3") {
     await s3Client().send(
       new PutObjectCommand({
@@ -91,6 +104,10 @@ export async function deleteImage(url: string | null | undefined) {
       const target = path.resolve(uploadDir(), rel);
       if (!target.startsWith(uploadDir() + path.sep)) return;
       await unlink(target);
+      return;
+    }
+    if (driver() === "blob" && url.includes(".blob.vercel-storage.com/")) {
+      await blobDel(url);
       return;
     }
     const base = (process.env.MEDIA_PUBLIC_BASE_URL || "").replace(/\/$/, "");
