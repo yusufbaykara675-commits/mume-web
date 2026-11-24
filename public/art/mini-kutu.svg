@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" preserveAspectRatio="xMidYMid slice">
+
+<defs>
+  <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f3e7d3"/><stop offset="1" stop-color="#e2cfb0"/>
+  </linearGradient>
+  <radialGradient id="warm6" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#ffcf7a" stop-opacity="0.75"/>
+    <stop offset="0.45" stop-color="#ffcf7a" stop-opacity="0.22"/>
+    <stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="wood6" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b48659"/><stop offset="0.08" stop-color="#9c6f45"/><stop offset="1" stop-color="#5e3e22"/>
+  </linearGradient>
+  <radialGradient id="flame6" cx="0.5" cy="0.72" r="0.62">
+    <stop offset="0" stop-color="#fffdf2"/><stop offset="0.28" stop-color="#fff1b8"/>
+    <stop offset="0.55" stop-color="#ffc552"/><stop offset="0.82" stop-color="#f07a1c" stop-opacity="0.85"/>
+    <stop offset="1" stop-color="#d9480f" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="halo6" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#fff6d8" stop-opacity="0.95"/>
+    <stop offset="0.25" stop-color="#ffd98a" stop-opacity="0.5"/>
+    <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="soft6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+  <filter id="blur46" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  <filter id="grain6">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 0.25  0 0 0 0 0.17  0 0 0 0 0.1  0 0 0 0.09 0"/>
+  </filter>
+</defs>
+<rect width="800" height="1000" fill="url(#bg6)"/>
+<rect x="0" y="820" width="800" height="180" fill="url(#wood6)"/>
+<path d="M0 850 Q240.0 842 480.0 854 T800 848" stroke="#4a2f19" stroke-opacity="0.18" stroke-width="2" fill="none"/>
+<path d="M0 910 Q320.0 900 560.0 915 T800 908" stroke="#4a2f19" stroke-opacity="0.14" stroke-width="2" fill="none"/>
+<rect x="0" y="820" width="800" height="3" fill="#d9b68c" opacity="0.6"/>
+<circle cx="400" cy="420" r="380" fill="url(#warm6)">
+  <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" repeatCount="indefinite"/></circle>
+<circle cx="512" cy="15" r="23" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="5.9s" repeatCount="indefinite"/></circle><circle cx="589" cy="406" r="43" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="5.3s" repeatCount="indefinite"/></circle><circle cx="338" cy="18" r="21" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="7.0s" repeatCount="indefinite"/></circle><circle cx="21" cy="119" r="35" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="7.2s" repeatCount="indefinite"/></circle><circle cx="176" cy="354" r="40" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="5.0s" repeatCount="indefinite"/></circle><circle cx="645" cy="419" r="25" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="5.6s" repeatCount="indefinite"/></circle><circle cx="766" cy="202" r="17" fill="#ffe2a6" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="5.4s" repeatCount="indefinite"/></circle>
+<defs><linearGradient id="w6" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#d8c3a0"/><stop offset="0.18" stop-color="#f2e6d0"/>
+  <stop offset="0.42" stop-color="#fbf4e6"/><stop offset="0.55" stop-color="#f2e6d0"/>
+  <stop offset="0.88" stop-color="#d8c3a0"/><stop offset="1" stop-color="#d8c3a0"/>
+</linearGradient>
+<linearGradient id="kraft6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c49a6c"/><stop offset="1" stop-color="#9a7148"/></linearGradient></defs>
+<ellipse cx="400" cy="850" rx="300" ry="30" fill="#2b1a0e" opacity="0.35" filter="url(#blur46)"/>
+<path d="M120 640 L680 640 L650 850 L150 850 Z" fill="url(#kraft6)"/>
+<rect x="120" y="625" width="560" height="30" rx="4" fill="#b88d60"/>
+
+<clipPath id="clip6_170_560"><path d="M170 560 L170 625.6 A60.0 14.399999999999999 0 0 0 290 625.6 L290 560 Z"/></clipPath>
+<ellipse cx="230.0" cy="640" rx="75.0" ry="18.72" fill="#2b1a0e" opacity="0.38" filter="url(#blur46)"/>
+<path d="M170 560 L170 625.6 A60.0 14.399999999999999 0 0 0 290 625.6 L290 560 Z" fill="url(#w6)"/>
+<g clip-path="url(#clip6_170_560)">
+  <rect x="170" y="560" width="120" height="80" fill="url(#w6)" opacity="0.18"/>
+  <rect x="210.8" y="560" width="8.4" height="80" fill="#fff" opacity="0.16"/>
+</g>
+<ellipse cx="230.0" cy="560" rx="60.0" ry="14.399999999999999" fill="#efe0c4"/>
+<ellipse cx="230.0" cy="562" rx="43.199999999999996" ry="8.927999999999999" fill="#f6d79a" opacity="0.9">
+  <animate attributeName="opacity" values="0.8;1;0.85;0.95;0.8" dur="3.1s" begin="0.20s" repeatCount="indefinite"/>
+</ellipse>
+
+<g transform="translate(230.0 558) scale(0.65)">
+  <circle cx="0" cy="-34" r="95" fill="url(#halo6)" opacity="0.8">
+    <animate attributeName="opacity" values="0.7;0.95;0.78;0.9;0.7" dur="3.1s" begin="0.20s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="92;100;95;98;92" dur="3.1s" begin="0.20s" repeatCount="indefinite"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="skewX" values="0;3;-2.5;1.5;-1;0" dur="2.6s" begin="0.20s" repeatCount="indefinite"/>
+    <g>
+      <animateTransform attributeName="transform" type="scale" values="1 1;0.96 1.07;1.03 0.95;0.98 1.04;1 1" dur="1.7s" begin="0.20s" repeatCount="indefinite"/>
+      <path d="M0 4 C-15 -6 -14 -30 -4 -52 C-1 -60 0 -70 0 -76 C3 -66 6 -58 9 -50 C17 -30 15 -6 0 4 Z" fill="url(#flame6)"/>
+      <path d="M0 0 C-7 -6 -7 -20 0 -34 C7 -20 7 -6 0 0 Z" fill="#fffef6" opacity="0.92"/>
+      <ellipse cx="0" cy="-3" rx="4.5" ry="6" fill="#6d8ff0" opacity="0.55"/>
+    </g>
+  </g>
+  <path d="M-1.5 6 Q0 -2 1.5 -5" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+</g>
+
+<clipPath id="clip6_340_545"><path d="M340 545 L340 625.6 A60.0 14.399999999999999 0 0 0 460 625.6 L460 545 Z"/></clipPath>
+<ellipse cx="400.0" cy="640" rx="75.0" ry="18.72" fill="#2b1a0e" opacity="0.38" filter="url(#blur46)"/>
+<path d="M340 545 L340 625.6 A60.0 14.399999999999999 0 0 0 460 625.6 L460 545 Z" fill="url(#w6)"/>
+<g clip-path="url(#clip6_340_545)">
+  <rect x="340" y="545" width="120" height="95" fill="url(#w6)" opacity="0.18"/>
+  <rect x="380.8" y="545" width="8.4" height="95" fill="#fff" opacity="0.16"/>
+</g>
+<ellipse cx="400.0" cy="545" rx="60.0" ry="14.399999999999999" fill="#efe0c4"/>
+<ellipse cx="400.0" cy="547" rx="43.199999999999996" ry="8.927999999999999" fill="#f6d79a" opacity="0.9">
+  <animate attributeName="opacity" values="0.8;1;0.85;0.95;0.8" dur="3.1s" begin="0.70s" repeatCount="indefinite"/>
+</ellipse>
+
+<g transform="translate(400.0 543) scale(0.68)">
+  <circle cx="0" cy="-34" r="95" fill="url(#halo6)" opacity="0.8">
+    <animate attributeName="opacity" values="0.7;0.95;0.78;0.9;0.7" dur="3.1s" begin="0.70s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="92;100;95;98;92" dur="3.1s" begin="0.70s" repeatCount="indefinite"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="skewX" values="0;3;-2.5;1.5;-1;0" dur="2.6s" begin="0.70s" repeatCount="indefinite"/>
+    <g>
+      <animateTransform attributeName="transform" type="scale" values="1 1;0.96 1.07;1.03 0.95;0.98 1.04;1 1" dur="1.7s" begin="0.70s" repeatCount="indefinite"/>
+      <path d="M0 4 C-15 -6 -14 -30 -4 -52 C-1 -60 0 -70 0 -76 C3 -66 6 -58 9 -50 C17 -30 15 -6 0 4 Z" fill="url(#flame6)"/>
+      <path d="M0 0 C-7 -6 -7 -20 0 -34 C7 -20 7 -6 0 0 Z" fill="#fffef6" opacity="0.92"/>
+      <ellipse cx="0" cy="-3" rx="4.5" ry="6" fill="#6d8ff0" opacity="0.55"/>
+    </g>
+  </g>
+  <path d="M-1.5 6 Q0 -2 1.5 -5" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+</g>
+
+<clipPath id="clip6_510_565"><path d="M510 565 L510 625.6 A60.0 14.399999999999999 0 0 0 630 625.6 L630 565 Z"/></clipPath>
+<ellipse cx="570.0" cy="640" rx="75.0" ry="18.72" fill="#2b1a0e" opacity="0.38" filter="url(#blur46)"/>
+<path d="M510 565 L510 625.6 A60.0 14.399999999999999 0 0 0 630 625.6 L630 565 Z" fill="url(#w6)"/>
+<g clip-path="url(#clip6_510_565)">
+  <rect x="510" y="565" width="120" height="75" fill="url(#w6)" opacity="0.18"/>
+  <rect x="550.8" y="565" width="8.4" height="75" fill="#fff" opacity="0.16"/>
+</g>
+<ellipse cx="570.0" cy="565" rx="60.0" ry="14.399999999999999" fill="#efe0c4"/>
+<ellipse cx="570.0" cy="567" rx="43.199999999999996" ry="8.927999999999999" fill="#f6d79a" opacity="0.9">
+  <animate attributeName="opacity" values="0.8;1;0.85;0.95;0.8" dur="3.1s" begin="1.10s" repeatCount="indefinite"/>
+</ellipse>
+
+<g transform="translate(570.0 563) scale(0.62)">
+  <circle cx="0" cy="-34" r="95" fill="url(#halo6)" opacity="0.8">
+    <animate attributeName="opacity" values="0.7;0.95;0.78;0.9;0.7" dur="3.1s" begin="1.10s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="92;100;95;98;92" dur="3.1s" begin="1.10s" repeatCount="indefinite"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="skewX" values="0;3;-2.5;1.5;-1;0" dur="2.6s" begin="1.10s" repeatCount="indefinite"/>
+    <g>
+      <animateTransform attributeName="transform" type="scale" values="1 1;0.96 1.07;1.03 0.95;0.98 1.04;1 1" dur="1.7s" begin="1.10s" repeatCount="indefinite"/>
+      <path d="M0 4 C-15 -6 -14 -30 -4 -52 C-1 -60 0 -70 0 -76 C3 -66 6 -58 9 -50 C17 -30 15 -6 0 4 Z" fill="url(#flame6)"/>
+      <path d="M0 0 C-7 -6 -7 -20 0 -34 C7 -20 7 -6 0 0 Z" fill="#fffef6" opacity="0.92"/>
+      <ellipse cx="0" cy="-3" rx="4.5" ry="6" fill="#6d8ff0" opacity="0.55"/>
+    </g>
+  </g>
+  <path d="M-1.5 6 Q0 -2 1.5 -5" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+</g>
+<rect x="380" y="640" width="40" height="210" fill="#b65522" opacity="0.92"/>
+<path d="M400 690 C340 650 320 720 395 705 M400 690 C460 650 480 720 405 705" stroke="#b65522" stroke-width="16" fill="none" stroke-linecap="round"/>
+<text x="400" y="800" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="30" fill="#f6efe2">MuMê</text>
+<rect width="800" height="1000" filter="url(#grain6)"/>
+</svg>

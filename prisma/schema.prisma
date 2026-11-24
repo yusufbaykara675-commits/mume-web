@@ -1,0 +1,257 @@
+// MuMê Mum Atölyesi — veritabanı şeması
+// Fiyatlar kuruş cinsinden tam sayı olarak tutulur (ör. 450,00 TL = 45000).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------------
+// Yönetim
+// ------------------------------------------------------------------
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String   @default("Yönetici")
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Giriş denemeleri, form gönderimleri vb. için basit hız sınırlayıcı
+model RateLimit {
+  key         String   @id
+  count       Int      @default(0)
+  windowStart DateTime @default(now())
+}
+
+// Site metinleri, iletişim bilgileri, çalışma saatleri, ana sayfa bannerı...
+model SiteSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+// ------------------------------------------------------------------
+// Ürünler
+// ------------------------------------------------------------------
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  imageUrl    String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id               String         @id @default(cuid())
+  name             String
+  slug             String         @unique
+  shortDescription String?
+  description      String         @default("")
+  priceCents       Int? // null = "Fiyat için iletişime geçin"
+  compareAtCents   Int? // indirim öncesi fiyat (isteğe bağlı)
+  stock            Int? // null = siparişe özel üretim, 0 = tükendi
+  colors           String[]       @default([])
+  fragrances       String[]       @default([])
+  isActive         Boolean        @default(true)
+  isFeatured       Boolean        @default(false)
+  isSample         Boolean        @default(false) // örnek içerik işareti
+  categoryId       String?
+  category         Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images           ProductImage[]
+  orderItems       OrderItem[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([categoryId])
+  @@index([isActive, isFeatured])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String  @default("")
+  sortOrder Int     @default(0)
+
+  @@index([productId])
+}
+
+// ------------------------------------------------------------------
+// Siparişler (WhatsApp üzerinden tamamlanır, ödeme altyapısı hazır)
+// ------------------------------------------------------------------
+
+enum OrderStatus {
+  YENI
+  ONAYLANDI
+  HAZIRLANIYOR
+  KARGODA
+  TAMAMLANDI
+  IPTAL
+}
+
+enum PaymentStatus {
+  ODENMEDI
+  BEKLIYOR
+  ODENDI
+  IADE
+  BASARISIZ
+}
+
+enum DeliveryMethod {
+  KARGO
+  ATOLYEDEN_TESLIM
+}
+
+model Order {
+  id                 String         @id @default(cuid())
+  code               String         @unique
+  customerName       String
+  phone              String
+  email              String?
+  city               String?
+  address            String?
+  deliveryMethod     DeliveryMethod @default(KARGO)
+  note               String?
+  totalCents         Int            @default(0)
+  hasUnpricedItems   Boolean        @default(false)
+  status             OrderStatus    @default(YENI)
+  paymentStatus      PaymentStatus  @default(ODENMEDI)
+  paymentProvider    String?
+  paymentReference   String?
+  stockDeducted      Boolean        @default(false)
+  kvkkConsent        Boolean
+  marketingConsent   Boolean        @default(false)
+  consentTextVersion String
+  consentAt          DateTime
+  adminNote          String?
+  items              OrderItem[]
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  @@index([status, createdAt])
+}
+
+model OrderItem {
+  id             String   @id @default(cuid())
+  orderId        String
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId      String?
+  product        Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName    String
+  unitPriceCents Int?
+  quantity       Int
+  color          String?
+  fragrance      String?
+
+  @@index([orderId])
+}
+
+// ------------------------------------------------------------------
+// Workshoplar ve rezervasyonlar
+// ------------------------------------------------------------------
+
+model Workshop {
+  id               String            @id @default(cuid())
+  title            String
+  slug             String            @unique
+  shortDescription String?
+  description      String            @default("")
+  durationMinutes  Int               @default(120)
+  priceCents       Int? // kişi başı ücret, null = "Ücret için iletişime geçin"
+  includes         String[]          @default([]) // "Tüm malzemeler dahil" gibi maddeler
+  coverImageUrl    String?
+  gallery          String[]          @default([])
+  isActive         Boolean           @default(true)
+  isSample         Boolean           @default(false)
+  sortOrder        Int               @default(0)
+  sessions         WorkshopSession[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model WorkshopSession {
+  id           String        @id @default(cuid())
+  workshopId   String
+  workshop     Workshop      @relation(fields: [workshopId], references: [id], onDelete: Cascade)
+  startsAt     DateTime
+  capacity     Int
+  note         String?
+  isActive     Boolean       @default(true)
+  reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([workshopId, startsAt])
+}
+
+enum ReservationStatus {
+  BEKLIYOR
+  ONAYLANDI
+  REDDEDILDI
+  IPTAL
+}
+
+model Reservation {
+  id                 String            @id @default(cuid())
+  code               String            @unique
+  sessionId          String
+  session            WorkshopSession   @relation(fields: [sessionId], references: [id], onDelete: Restrict)
+  fullName           String
+  phone              String
+  email              String?
+  participants       Int
+  note               String?
+  status             ReservationStatus @default(BEKLIYOR)
+  adminNote          String?
+  kvkkConsent        Boolean
+  consentTextVersion String
+  consentAt          DateTime
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@index([sessionId, status])
+}
+
+// ------------------------------------------------------------------
+// İletişim ve müşteri yorumları
+// ------------------------------------------------------------------
+
+model ContactMessage {
+  id                 String   @id @default(cuid())
+  name               String
+  phone              String?
+  email              String?
+  subject            String?
+  message            String
+  isRead             Boolean  @default(false)
+  isArchived         Boolean  @default(false)
+  kvkkConsent        Boolean
+  consentTextVersion String
+  consentAt          DateTime
+  createdAt          DateTime @default(now())
+}
+
+// Yalnızca gerçek müşteri yorumları eklenmelidir. Yayında yorum yoksa bölüm gizlenir.
+model Testimonial {
+  id          String   @id @default(cuid())
+  authorName  String
+  text        String
+  source      String? // ör. "Instagram yorumu", "Google yorumu"
+  isPublished Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+}
