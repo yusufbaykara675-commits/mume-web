@@ -60,8 +60,8 @@ export function ImageInput({
         required={required}
         className={className}
         onChange={async (e) => {
-          const input = e.currentTarget;
-          const list = Array.from(input.files ?? []);
+          const input = e.currentTarget as HTMLInputElement;
+          const list: File[] = Array.from(input.files ?? []);
           if (!list.length) return setStatus("");
           setStatus("Fotoğraflar hazırlanıyor…");
           const out = await Promise.all(list.map(shrink));
