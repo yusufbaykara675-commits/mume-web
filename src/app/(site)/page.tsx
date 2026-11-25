@@ -11,6 +11,7 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { WorkshopCard } from "@/components/site/WorkshopCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { t } from "@/i18n";
+import { FaqSection, HowToOrder, TrustBar } from "@/components/site/InfoSections";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSettings(["seo"]);
@@ -30,12 +31,6 @@ const EMBERS = [
 ];
 
 const OCCASIONS = ["Doğum günü", "Öğretmenler Günü", "Söz & nişan", "Yeni ev", "Anneler Günü", "Sevgililer Günü", "Kurumsal hediye", "Baby shower"];
-
-const PROMISES = [
-  { title: "Elde dökülür", text: "Her mum atölyemizde, küçük partiler hâlinde hazırlanır." },
-  { title: "Kişiye özel", text: "İsim, tarih ya da kısa bir notla size özel tasarlanır." },
-  { title: "Hediyeye hazır", text: "Özenli paketiyle sevdiklerinize gönderilmeye hazırdır." },
-];
 
 export default async function HomePage() {
   const [settings, products, categories, workshops, testimonials] = await Promise.all([
@@ -105,6 +100,16 @@ export default async function HomePage() {
                 />
               ))}
             </div>
+            <Link
+              href="/urunler?kategori=kisiye-ozel-mumlar"
+              className="hero-fade absolute -right-3 top-8 hidden w-40 rounded-2xl bg-ivory/95 p-2 shadow-[var(--shadow-lift)] backdrop-blur transition hover:-translate-y-1 lg:block xl:-right-8"
+              style={{ ["--d" as string]: "0.9s" }}
+            >
+              <span className="relative block aspect-square overflow-hidden rounded-xl">
+                <Image src="/art/isimli-mum.svg" alt="" fill sizes="160px" className="object-cover" />
+              </span>
+              <span className="block px-1 pb-1 pt-2 text-xs font-semibold text-espresso">İsme özel mumlar →</span>
+            </Link>
             <div className="float-slow absolute -bottom-6 left-4 hidden rounded-2xl bg-ivory/95 px-5 py-4 shadow-[var(--shadow-soft)] backdrop-blur sm:block md:-left-8">
               <p className="flex items-center gap-2 text-sm font-semibold text-espresso">
                 <span className="flicker inline-block h-2.5 w-2.5 rounded-full bg-flame shadow-[0_0_12px_4px_rgb(238_208_148/0.8)]" />
@@ -117,6 +122,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <TrustBar />
 
       {/* KATEGORİLER */}
       {categories.length > 0 && (
@@ -157,19 +164,6 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* SÖZLER */}
-      <section className="container-page pb-20">
-        <ul data-stagger="120" className="grid gap-4 md:grid-cols-3">
-          {PROMISES.map((p) => (
-            <li key={p.title} className="rounded-[var(--radius-card)] border border-sand bg-cream/50 p-7">
-              <span className="flicker mb-4 block h-3 w-3 rounded-full bg-flame shadow-[0_0_16px_6px_rgb(238_208_148/0.7)]" />
-              <p className="font-serif text-2xl text-espresso">{p.title}</p>
-              <p className="mt-1 text-sm text-ink/70">{p.text}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
       {/* HEDİYE BANDI */}
       <section className="grain relative overflow-hidden bg-olive text-cream">
         <div aria-hidden className="pointer-events-none absolute -left-32 top-1/2 h-[34rem] w-[34rem] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(238_208_148/0.35),transparent_65%)]" />
@@ -205,6 +199,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <HowToOrder />
 
       {/* WORKSHOPLAR */}
       <section className="container-page py-20 md:py-28">
@@ -274,6 +270,8 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      <FaqSection />
 
       {/* INSTAGRAM */}
       <section className="container-page py-20 md:py-24">

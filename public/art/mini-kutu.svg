@@ -22,6 +22,19 @@
     <stop offset="0.25" stop-color="#ffd98a" stop-opacity="0.5"/>
     <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
   </radialGradient>
+  <linearGradient id="waxglow6" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffb04a" stop-opacity="0.55"/>
+    <stop offset="0.35" stop-color="#ffc977" stop-opacity="0.22"/>
+    <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="vig6" cx="0.5" cy="0.45" r="0.75">
+    <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#1e120a" stop-opacity="0.38"/>
+  </radialGradient>
+  <linearGradient id="reflect6" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd27a" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+  </linearGradient>
   <filter id="soft6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
   <filter id="blur46" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
   <filter id="grain6">
@@ -30,6 +43,7 @@
   </filter>
 </defs>
 <rect width="800" height="1000" fill="url(#bg6)"/>
+<rect x="496.0" y="-50.0" width="400.0" height="700.0" rx="40" fill="#fff8ea" opacity="0.18" filter="url(#soft6)" transform="rotate(8 640.0 300.0)"/>
 <rect x="0" y="820" width="800" height="180" fill="url(#wood6)"/>
 <path d="M0 850 Q240.0 842 480.0 854 T800 848" stroke="#4a2f19" stroke-opacity="0.18" stroke-width="2" fill="none"/>
 <path d="M0 910 Q320.0 900 560.0 915 T800 908" stroke="#4a2f19" stroke-opacity="0.14" stroke-width="2" fill="none"/>
@@ -53,6 +67,10 @@
 <g clip-path="url(#clip6_170_560)">
   <rect x="170" y="560" width="120" height="80" fill="url(#w6)" opacity="0.18"/>
   <rect x="210.8" y="560" width="8.4" height="80" fill="#fff" opacity="0.16"/>
+  <rect x="170" y="560" width="120" height="80" fill="url(#waxglow6)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.20s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="284" y="560" width="6" height="80" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="230.0" cy="560" rx="60.0" ry="14.399999999999999" fill="#efe0c4"/>
 <ellipse cx="230.0" cy="562" rx="43.199999999999996" ry="8.927999999999999" fill="#f6d79a" opacity="0.9">
@@ -82,6 +100,10 @@
 <g clip-path="url(#clip6_340_545)">
   <rect x="340" y="545" width="120" height="95" fill="url(#w6)" opacity="0.18"/>
   <rect x="380.8" y="545" width="8.4" height="95" fill="#fff" opacity="0.16"/>
+  <rect x="340" y="545" width="120" height="95" fill="url(#waxglow6)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.70s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="454" y="545" width="6" height="95" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="400.0" cy="545" rx="60.0" ry="14.399999999999999" fill="#efe0c4"/>
 <ellipse cx="400.0" cy="547" rx="43.199999999999996" ry="8.927999999999999" fill="#f6d79a" opacity="0.9">
@@ -111,6 +133,10 @@
 <g clip-path="url(#clip6_510_565)">
   <rect x="510" y="565" width="120" height="75" fill="url(#w6)" opacity="0.18"/>
   <rect x="550.8" y="565" width="8.4" height="75" fill="#fff" opacity="0.16"/>
+  <rect x="510" y="565" width="120" height="75" fill="url(#waxglow6)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="1.10s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="624" y="565" width="6" height="75" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="570.0" cy="565" rx="60.0" ry="14.399999999999999" fill="#efe0c4"/>
 <ellipse cx="570.0" cy="567" rx="43.199999999999996" ry="8.927999999999999" fill="#f6d79a" opacity="0.9">
@@ -136,5 +162,5 @@
 <rect x="380" y="640" width="40" height="210" fill="#b65522" opacity="0.92"/>
 <path d="M400 690 C340 650 320 720 395 705 M400 690 C460 650 480 720 405 705" stroke="#b65522" stroke-width="16" fill="none" stroke-linecap="round"/>
 <text x="400" y="800" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="30" fill="#f6efe2">MuMê</text>
-<rect width="800" height="1000" filter="url(#grain6)"/>
+<ellipse cx="400.0" cy="860" rx="256.0" ry="38" fill="url(#reflect6)" filter="url(#soft6)"><animate attributeName="opacity" values="0.7;1;0.8;1;0.7" dur="3.1s" repeatCount="indefinite"/></ellipse><rect width="800" height="1000" fill="url(#vig6)"/><rect width="800" height="1000" filter="url(#grain6)"/>
 </svg>

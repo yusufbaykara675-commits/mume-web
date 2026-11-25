@@ -22,6 +22,19 @@
     <stop offset="0.25" stop-color="#ffd98a" stop-opacity="0.5"/>
     <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
   </radialGradient>
+  <linearGradient id="waxglow3" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffb04a" stop-opacity="0.55"/>
+    <stop offset="0.35" stop-color="#ffc977" stop-opacity="0.22"/>
+    <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="vig3" cx="0.5" cy="0.45" r="0.75">
+    <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#1e120a" stop-opacity="0.38"/>
+  </radialGradient>
+  <linearGradient id="reflect3" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd27a" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+  </linearGradient>
   <filter id="soft3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
   <filter id="blur43" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
   <filter id="grain3">
@@ -30,6 +43,7 @@
   </filter>
 </defs>
 <rect width="800" height="1000" fill="url(#bg3)"/>
+<rect x="496.0" y="-50.0" width="400.0" height="700.0" rx="40" fill="#fff8ea" opacity="0.18" filter="url(#soft3)" transform="rotate(8 640.0 300.0)"/>
 <rect x="0" y="820" width="800" height="180" fill="url(#wood3)"/>
 <path d="M0 850 Q240.0 842 480.0 854 T800 848" stroke="#4a2f19" stroke-opacity="0.18" stroke-width="2" fill="none"/>
 <path d="M0 910 Q320.0 900 560.0 915 T800 908" stroke="#4a2f19" stroke-opacity="0.14" stroke-width="2" fill="none"/>
@@ -48,6 +62,10 @@
 <g clip-path="url(#clip3_300_380)"><path d="M322.2 404.0 Q330.2 610.0 322.2 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M344.4 404.0 Q336.4 610.0 344.4 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M366.7 404.0 Q374.7 610.0 366.7 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M388.9 404.0 Q380.9 610.0 388.9 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M411.1 404.0 Q419.1 610.0 411.1 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M433.3 404.0 Q425.3 610.0 433.3 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M455.6 404.0 Q463.6 610.0 455.6 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M477.8 404.0 Q469.8 610.0 477.8 840.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/>
   <rect x="300" y="380" width="200" height="460" fill="url(#w3)" opacity="0.18"/>
   <rect x="368.0" y="380" width="14.000000000000002" height="460" fill="#fff" opacity="0.16"/>
+  <rect x="300" y="380" width="200" height="220.00000000000003" fill="url(#waxglow3)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.00s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="494" y="380" width="6" height="460" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="400.0" cy="380" rx="100.0" ry="24.0" fill="#e9b892"/>
 <ellipse cx="400.0" cy="382" rx="72.0" ry="14.879999999999999" fill="#f7d39b" opacity="0.9">
@@ -70,5 +88,5 @@
   </g>
   <path d="M-1.5 6 Q0 -2 1.5 -5" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" fill="none"/>
 </g>
-<rect width="800" height="1000" filter="url(#grain3)"/>
+<ellipse cx="400.0" cy="860" rx="256.0" ry="38" fill="url(#reflect3)" filter="url(#soft3)"><animate attributeName="opacity" values="0.7;1;0.8;1;0.7" dur="3.1s" repeatCount="indefinite"/></ellipse><rect width="800" height="1000" fill="url(#vig3)"/><rect width="800" height="1000" filter="url(#grain3)"/>
 </svg>

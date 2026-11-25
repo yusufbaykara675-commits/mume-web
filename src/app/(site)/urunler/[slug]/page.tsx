@@ -15,6 +15,7 @@ import { ProductGallery } from "@/components/site/ProductGallery";
 import { AddToCart } from "@/components/cart/AddToCart";
 import { ProductCard } from "@/components/site/ProductCard";
 import { JsonLd } from "@/components/site/JsonLd";
+import { ProductInfo } from "@/components/site/InfoSections";
 import { t } from "@/i18n";
 
 type Params = Promise<{ slug: string }>;
@@ -127,6 +128,7 @@ export default async function ProductPage({ params }: { params: Params }) {
               </a>
             )}
             <p className="mt-4 text-xs leading-relaxed text-ink/60">{t.shop.customNote}</p>
+            <ProductInfo />
           </div>
 
           <div className="prose-mume mt-10 border-t border-sand pt-8">

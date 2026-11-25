@@ -22,6 +22,19 @@
     <stop offset="0.25" stop-color="#ffd98a" stop-opacity="0.5"/>
     <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
   </radialGradient>
+  <linearGradient id="waxglow4" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffb04a" stop-opacity="0.55"/>
+    <stop offset="0.35" stop-color="#ffc977" stop-opacity="0.22"/>
+    <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="vig4" cx="0.5" cy="0.45" r="0.75">
+    <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#1e120a" stop-opacity="0.38"/>
+  </radialGradient>
+  <linearGradient id="reflect4" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd27a" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+  </linearGradient>
   <filter id="soft4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
   <filter id="blur44" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
   <filter id="grain4">
@@ -30,6 +43,7 @@
   </filter>
 </defs>
 <rect width="800" height="1000" fill="url(#bg4)"/>
+<rect x="496.0" y="-50.0" width="400.0" height="700.0" rx="40" fill="#fff8ea" opacity="0.18" filter="url(#soft4)" transform="rotate(8 640.0 300.0)"/>
 <rect x="0" y="820" width="800" height="180" fill="url(#wood4)"/>
 <path d="M0 850 Q240.0 842 480.0 854 T800 848" stroke="#4a2f19" stroke-opacity="0.18" stroke-width="2" fill="none"/>
 <path d="M0 910 Q320.0 900 560.0 915 T800 908" stroke="#4a2f19" stroke-opacity="0.14" stroke-width="2" fill="none"/>
@@ -56,6 +70,10 @@
 <g clip-path="url(#clip4_160_560)"><path d="M176.7 578.0 Q184.7 702.5 176.7 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M193.3 578.0 Q185.3 702.5 193.3 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M210.0 578.0 Q218.0 702.5 210.0 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M226.7 578.0 Q218.7 702.5 226.7 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M243.3 578.0 Q251.3 702.5 243.3 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M260.0 578.0 Q252.0 702.5 260.0 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M276.7 578.0 Q284.7 702.5 276.7 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M293.3 578.0 Q285.3 702.5 293.3 845.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/>
   <rect x="160" y="560" width="150" height="285" fill="url(#s4)" opacity="0.18"/>
   <rect x="211.0" y="560" width="10.500000000000002" height="285" fill="#fff" opacity="0.16"/>
+  <rect x="160" y="560" width="150" height="165.0" fill="url(#waxglow4)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.40s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="304" y="560" width="6" height="285" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="235.0" cy="560" rx="75.0" ry="18.0" fill="#e8d5b4"/>
 <ellipse cx="235.0" cy="562" rx="54.0" ry="11.16" fill="#f6d79a" opacity="0.9">
@@ -84,6 +102,10 @@
 <g clip-path="url(#clip4_470_620)"><path d="M486.7 638.0 Q494.7 734.0 486.7 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M503.3 638.0 Q495.3 734.0 503.3 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M520.0 638.0 Q528.0 734.0 520.0 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M536.7 638.0 Q528.7 734.0 536.7 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M553.3 638.0 Q561.3 734.0 553.3 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M570.0 638.0 Q562.0 734.0 570.0 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M586.7 638.0 Q594.7 734.0 586.7 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M603.3 638.0 Q595.3 734.0 603.3 848.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/>
   <rect x="470" y="620" width="150" height="228" fill="url(#b4)" opacity="0.18"/>
   <rect x="521.0" y="620" width="10.500000000000002" height="228" fill="#fff" opacity="0.16"/>
+  <rect x="470" y="620" width="150" height="165.0" fill="url(#waxglow4)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.90s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="614" y="620" width="6" height="228" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="545.0" cy="620" rx="75.0" ry="18.0" fill="#f0d9cd"/>
 <ellipse cx="545.0" cy="622" rx="54.0" ry="11.16" fill="#f6d79a" opacity="0.9">
@@ -112,6 +134,10 @@
 <g clip-path="url(#clip4_315_440)"><path d="M333.9 460.4 Q341.9 650.0 333.9 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M352.8 460.4 Q344.8 650.0 352.8 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M371.7 460.4 Q379.7 650.0 371.7 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M390.6 460.4 Q382.6 650.0 390.6 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M409.4 460.4 Q417.4 650.0 409.4 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M428.3 460.4 Q420.3 650.0 428.3 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M447.2 460.4 Q455.2 650.0 447.2 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/><path d="M466.1 460.4 Q458.1 650.0 466.1 860.0" stroke="#000" stroke-opacity="0.07" stroke-width="5" fill="none"/>
   <rect x="315" y="440" width="170" height="420" fill="url(#w4)" opacity="0.18"/>
   <rect x="372.8" y="440" width="11.9" height="420" fill="#fff" opacity="0.16"/>
+  <rect x="315" y="440" width="170" height="187.00000000000003" fill="url(#waxglow4)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.00s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="479" y="440" width="6" height="420" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="400.0" cy="440" rx="85.0" ry="20.4" fill="#efe0c4"/>
 <ellipse cx="400.0" cy="442" rx="61.199999999999996" ry="12.648" fill="#f6d79a" opacity="0.9">
@@ -134,5 +160,5 @@
   </g>
   <path d="M-1.5 6 Q0 -2 1.5 -5" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" fill="none"/>
 </g>
-<rect width="800" height="1000" filter="url(#grain4)"/>
+<ellipse cx="400.0" cy="860" rx="256.0" ry="38" fill="url(#reflect4)" filter="url(#soft4)"><animate attributeName="opacity" values="0.7;1;0.8;1;0.7" dur="3.1s" repeatCount="indefinite"/></ellipse><rect width="800" height="1000" fill="url(#vig4)"/><rect width="800" height="1000" filter="url(#grain4)"/>
 </svg>

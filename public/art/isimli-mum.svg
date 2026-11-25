@@ -22,6 +22,19 @@
     <stop offset="0.25" stop-color="#ffd98a" stop-opacity="0.5"/>
     <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
   </radialGradient>
+  <linearGradient id="waxglow5" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffb04a" stop-opacity="0.55"/>
+    <stop offset="0.35" stop-color="#ffc977" stop-opacity="0.22"/>
+    <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="vig5" cx="0.5" cy="0.45" r="0.75">
+    <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#1e120a" stop-opacity="0.38"/>
+  </radialGradient>
+  <linearGradient id="reflect5" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd27a" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+  </linearGradient>
   <filter id="soft5" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
   <filter id="blur45" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
   <filter id="grain5">
@@ -30,6 +43,7 @@
   </filter>
 </defs>
 <rect width="800" height="1000" fill="url(#bg5)"/>
+<rect x="496.0" y="-50.0" width="400.0" height="700.0" rx="40" fill="#fff8ea" opacity="0.18" filter="url(#soft5)" transform="rotate(8 640.0 300.0)"/>
 <rect x="0" y="820" width="800" height="180" fill="url(#wood5)"/>
 <path d="M0 850 Q240.0 842 480.0 854 T800 848" stroke="#4a2f19" stroke-opacity="0.18" stroke-width="2" fill="none"/>
 <path d="M0 910 Q320.0 900 560.0 915 T800 908" stroke="#4a2f19" stroke-opacity="0.14" stroke-width="2" fill="none"/>
@@ -48,6 +62,10 @@
 <g clip-path="url(#clip5_280_430)"><rect x="300" y="610" width="200" height="120" rx="8" fill="#fbf6ec" stroke="#c8a77a" stroke-width="2"/><text x="400" y="668" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="44" fill="#6e4710">Elif</text><text x="400" y="705" text-anchor="middle" font-family="Georgia,serif" font-size="16" letter-spacing="3" fill="#b4673b">24 · 11 · 2026</text><g transform="translate(330 590) rotate(0)"><ellipse cx="0" cy="-8.8" rx="5.8" ry="9.6" fill="#c8612d" transform="rotate(0)" opacity="0.92"/><ellipse cx="0" cy="-8.8" rx="5.8" ry="9.6" fill="#c8612d" transform="rotate(72)" opacity="0.92"/><ellipse cx="0" cy="-8.8" rx="5.8" ry="9.6" fill="#c8612d" transform="rotate(144)" opacity="0.92"/><ellipse cx="0" cy="-8.8" rx="5.8" ry="9.6" fill="#c8612d" transform="rotate(216)" opacity="0.92"/><ellipse cx="0" cy="-8.8" rx="5.8" ry="9.6" fill="#c8612d" transform="rotate(288)" opacity="0.92"/><circle r="3.5" fill="#e9b44c"/></g><g transform="translate(470 760) rotate(-20)"><path d="M0 0 Q22.5 -12.600000000000001 45 0 Q22.5 12.600000000000001 0 0 Z" fill="#7d7a3f" opacity="0.9"/><path d="M0 0 L40.5 0" stroke="#5a5626" stroke-width="1.2" opacity="0.6"/></g>
   <rect x="280" y="430" width="240" height="415" fill="url(#w5)" opacity="0.18"/>
   <rect x="361.6" y="430" width="16.8" height="415" fill="#fff" opacity="0.16"/>
+  <rect x="280" y="430" width="240" height="264.0" fill="url(#waxglow5)">
+    <animate attributeName="opacity" values="0.85;1;0.9;1;0.85" dur="3.1s" begin="0.00s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="514" y="430" width="6" height="415" fill="#3b2412" opacity="0.10"/>
 </g>
 <ellipse cx="400.0" cy="430" rx="120.0" ry="28.799999999999997" fill="#f2ded3"/>
 <ellipse cx="400.0" cy="432" rx="86.39999999999999" ry="17.855999999999998" fill="#f6d79a" opacity="0.9">
@@ -70,5 +88,5 @@
   </g>
   <path d="M-1.5 6 Q0 -2 1.5 -5" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" fill="none"/>
 </g>
-<rect width="800" height="1000" filter="url(#grain5)"/>
+<ellipse cx="400.0" cy="860" rx="256.0" ry="38" fill="url(#reflect5)" filter="url(#soft5)"><animate attributeName="opacity" values="0.7;1;0.8;1;0.7" dur="3.1s" repeatCount="indefinite"/></ellipse><rect width="800" height="1000" fill="url(#vig5)"/><rect width="800" height="1000" filter="url(#grain5)"/>
 </svg>
