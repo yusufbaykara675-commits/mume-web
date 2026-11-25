@@ -3,6 +3,7 @@ import { saveProduct } from "@/actions/admin/products";
 import { centsToInput } from "@/lib/format";
 import { AdminForm, SubmitButton } from "./AdminForm";
 import { Checkbox, Input, Panel, Textarea } from "./ui";
+import { ImageInput } from "./ImageInput";
 
 export function ProductForm({ product, categories }: { product?: Product | null; categories: Category[] }) {
   return (
@@ -54,7 +55,7 @@ export function ProductForm({ product, categories }: { product?: Product | null;
       <Panel title="Fotoğraflar">
         <label className="block">
           <span className="label">Fotoğraf ekle</span>
-          <input type="file" name="images" accept="image/jpeg,image/png,image/webp,image/avif,image/heic" multiple className="block w-full text-sm file:mr-4 file:rounded-full file:border-0 file:bg-espresso file:px-4 file:py-2 file:text-sm file:font-semibold file:text-ivory" />
+          <ImageInput name="images" multiple className="block w-full text-sm file:mr-4 file:rounded-full file:border-0 file:bg-espresso file:px-4 file:py-2 file:text-sm file:font-semibold file:text-ivory" />
           <span className="mt-1 block text-xs text-ink/55">Birden fazla seçebilirsiniz (en fazla 10, her biri 8 MB&apos;a kadar). Fotoğraflar otomatik küçültülüp optimize edilir. Dikey (4:5) fotoğraflar en iyi görünür.</span>
         </label>
       </Panel>

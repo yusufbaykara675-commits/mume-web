@@ -1,12 +1,12 @@
 # Caddy, Let's Encrypt sertifikasını otomatik alır ve yeniler (HTTPS).
 # DNS kayıtları sunucuya yönlenmeden önce başlatılırsa sertifika alınamaz.
 
-mume.com {
+mumeatolye.com {
 	encode zstd gzip
 	reverse_proxy app:3000
 }
 
 # www → ana alan adına kalıcı yönlendirme
-www.mume.com {
-	redir https://mume.com{uri} permanent
+www.mumeatolye.com {
+	redir https://mumeatolye.com{uri} permanent
 }

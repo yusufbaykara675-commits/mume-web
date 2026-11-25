@@ -4,6 +4,7 @@ import { getSettings } from "@/lib/settings";
 import { addInstagramPost, removeInstagramPost, saveAbout, saveBusiness, saveHome, saveHours } from "@/actions/admin/content";
 import { AdminForm, ConfirmSubmit, SubmitButton } from "@/components/admin/AdminForm";
 import { Input, PageHeader, Panel, Textarea } from "@/components/admin/ui";
+import { ImageInput } from "@/components/admin/ImageInput";
 
 export const metadata = { title: "Site İçeriği" };
 
@@ -91,7 +92,7 @@ export default async function ContentPage() {
                 </div>
                 <label className="block">
                   <span className="label">Banner görseli (değiştirmek için seçin)</span>
-                  <input type="file" name="heroImageFile" accept="image/*" className={fileClass} />
+                  <ImageInput name="heroImageFile" className={fileClass} />
                 </label>
                 <Input label="Banner görsel açıklaması" name="heroImageAlt" defaultValue={home.heroImageAlt} />
               </div>
@@ -108,7 +109,7 @@ export default async function ContentPage() {
                 </div>
                 <label className="block">
                   <span className="label">Hikâye görseli</span>
-                  <input type="file" name="storyImageFile" accept="image/*" className={fileClass} />
+                  <ImageInput name="storyImageFile" className={fileClass} />
                 </label>
               </div>
               <Textarea label="Google arama açıklaması (ana sayfa)" name="seoDescription" rows={2} defaultValue={seo.homeDescription} hint="150–160 karakter idealdir." />
@@ -129,7 +130,7 @@ export default async function ContentPage() {
                 </div>
                 <label className="block">
                   <span className="label">Sayfa görseli</span>
-                  <input type="file" name="imageFile" accept="image/*" className={fileClass} />
+                  <ImageInput name="imageFile" className={fileClass} />
                 </label>
               </div>
               <p className="label">Değerlerimiz (3 kutu)</p>
@@ -153,7 +154,7 @@ export default async function ContentPage() {
             <AdminForm action={addInstagramPost} resetOnSuccess className="mb-6 grid gap-4 rounded-xl bg-cream/60 p-4 sm:grid-cols-[1fr_1fr_1fr_auto] sm:items-end">
               <label className="block">
                 <span className="label">Fotoğraf *</span>
-                <input type="file" name="image" accept="image/*" required className={fileClass} />
+                <ImageInput name="image" required className={fileClass} />
               </label>
               <Input label="Gönderi bağlantısı" name="url" placeholder="https://www.instagram.com/p/…" />
               <Input label="Açıklama" name="alt" placeholder="Lavanta detaylı mum" />

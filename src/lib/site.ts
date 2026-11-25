@@ -1,4 +1,6 @@
-export const SITE_URL = (process.env.SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+export const SITE_URL = (
+  process.env.SITE_URL || (process.env.NODE_ENV === "production" ? "https://mumeatolye.com" : "http://localhost:3000")
+).replace(/\/$/, "");
 
 export const SITE_NAME = "MuMê Mum Atölyesi";
 

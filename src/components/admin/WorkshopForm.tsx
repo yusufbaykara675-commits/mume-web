@@ -3,6 +3,7 @@ import { saveWorkshop } from "@/actions/admin/workshops";
 import { centsToInput } from "@/lib/format";
 import { AdminForm, SubmitButton } from "./AdminForm";
 import { Checkbox, Input, Panel, Textarea } from "./ui";
+import { ImageInput } from "./ImageInput";
 
 const fileClass =
   "block w-full text-sm file:mr-4 file:rounded-full file:border-0 file:bg-espresso file:px-4 file:py-2 file:text-sm file:font-semibold file:text-ivory";
@@ -31,11 +32,11 @@ export function WorkshopForm({ workshop }: { workshop?: Workshop | null }) {
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="block">
             <span className="label">Kapak fotoğrafı {workshop?.coverImageUrl ? "(değiştirmek için seçin)" : ""}</span>
-            <input type="file" name="cover" accept="image/*" className={fileClass} />
+            <ImageInput name="cover" className={fileClass} />
           </label>
           <label className="block">
             <span className="label">Galeriye fotoğraf ekle</span>
-            <input type="file" name="gallery" accept="image/*" multiple className={fileClass} />
+            <ImageInput name="gallery" multiple className={fileClass} />
           </label>
         </div>
       </Panel>

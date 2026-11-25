@@ -1,7 +1,7 @@
 # mume.com — Yayına Alma Rehberi
 
 Bu rehber; alan adının nerede yönetildiğini bulmayı, düşük maliyetli bir barındırma seçmeyi, siteyi yayına almayı ve
-**Google Workspace e-postalarını bozmadan** mume.com'u bağlamayı adım adım anlatır.
+**Google Workspace e-postalarını bozmadan** mumeatolye.com'u bağlamayı adım adım anlatır.
 
 > ⚠️ **Altın kural:** DNS'te yalnızca `@` (mume.com) ve `www` için A / AAAA / CNAME kayıtlarını değiştirin.
 > **MX, SPF (TXT), DKIM (`google._domainkey`), DMARC (`_dmarc`) ve `google-site-verification` kayıtlarına dokunmayın.**
@@ -14,7 +14,7 @@ Bu rehber; alan adının nerede yönetildiğini bulmayı, düşük maliyetli bir
 Google Workspace üzerinden alınan alan adları artık Google tarafından değil, **Squarespace Domains** tarafından yönetiliyor:
 Google Domains'in tüm kayıtları Squarespace'e devredildi ve göç 10 Temmuz 2024'te tamamlandı. Kesin cevap için şu üç kontrolü yapın:
 
-1. **Kayıt firması (registrar):** <https://lookup.icann.org> adresine `mume.com` yazın. *Registrar* satırı alan adının nerede kayıtlı olduğunu gösterir
+1. **Kayıt firması (registrar):** <https://lookup.icann.org> adresine `mumeatolye.com` yazın. *Registrar* satırı alan adının nerede kayıtlı olduğunu gösterir
    (ör. Squarespace).
 2. **DNS sağlayıcısı:** Aynı sorgudaki *Name Servers* satırına bakın.
    - `ns-cloud-*.googledomains.com` → DNS Squarespace üzerinden yönetiliyor (Google altyapısında).
@@ -90,7 +90,7 @@ nano .env
 
 | Değişken | Değer |
 |---|---|
-| `SITE_URL` | `https://mume.com` |
+| `SITE_URL` | `https://mumeatolye.com` |
 | `POSTGRES_PASSWORD` | Uzun rastgele bir şifre (`openssl rand -base64 24`) |
 | `AUTH_SECRET` | `openssl rand -base64 48` çıktısı |
 | `ADMIN_EMAIL` | Panel giriş e-postanız |
@@ -107,7 +107,7 @@ docker compose logs -f app                  # açılış kayıtlarını izlemek 
 ```
 
 Caddy, DNS kayıtları sunucuya ulaştığı anda Let's Encrypt sertifikasını **otomatik** alır; HTTPS ve
-`www.mume.com → mume.com` yönlendirmesi `Caddyfile` içinde tanımlıdır.
+`www.mumeatolye.com → mume.com` yönlendirmesi `Caddyfile` içinde tanımlıdır.
 
 ### 4A.5 Güncelleme
 
@@ -139,8 +139,8 @@ Yedekleri sunucu dışına (ör. bilgisayarınıza veya Google Drive'a) kopyalay
    (Vercel'de sunucu diski kalıcı değildir; bu yüzden `local` yerine `s3` zorunludur.)
 5. *Build Command*: `npx prisma migrate deploy && npm run build`.
 6. Deploy edin; ardından bilgisayarınızda `.env`'e aynı `DATABASE_URL`'yi yazıp `npm run db:seed` çalıştırın.
-7. *Settings → Domains* bölümüne `mume.com` ve `www.mume.com` ekleyin. Vercel'in o ekranda gösterdiği DNS değerlerini
-   Bölüm 5'teki gibi girin ve `www`'yi `mume.com`'a yönlendirecek şekilde ayarlayın. HTTPS otomatik etkinleşir.
+7. *Settings → Domains* bölümüne `mumeatolye.com` ve `www.mumeatolye.com` ekleyin. Vercel'in o ekranda gösterdiği DNS değerlerini
+   Bölüm 5'teki gibi girin ve `www`'yi `mumeatolye.com`'a yönlendirecek şekilde ayarlayın. HTTPS otomatik etkinleşir.
 
 ---
 
@@ -184,20 +184,20 @@ Bu adım zorunlu değildir.
 ---
 
 ## 6. HTTPS ve www yönlendirmesi
-- **VPS:** Caddy, `mume.com` ve `www.mume.com` için sertifikayı otomatik alır ve yeniler; `www` kalıcı (301) olarak `https://mume.com`'a yönlenir.
-- **Vercel:** Domains ekranında `www.mume.com` → `mume.com` yönlendirmesini seçin; sertifika otomatik.
-- Kontrol: `curl -I http://www.mume.com` → `301` ve `location: https://mume.com/` görmelisiniz.
+- **VPS:** Caddy, `mumeatolye.com` ve `www.mumeatolye.com` için sertifikayı otomatik alır ve yeniler; `www` kalıcı (301) olarak `https://mumeatolye.com`'a yönlenir.
+- **Vercel:** Domains ekranında `www.mumeatolye.com` → `mumeatolye.com` yönlendirmesini seçin; sertifika otomatik.
+- Kontrol: `curl -I http://www.mumeatolye.com` → `301` ve `location: https://mumeatolye.com/` görmelisiniz.
 
 ---
 
 ## 7. Yayından sonra
-1. `https://mume.com/yonetim` → giriş yapın → **Hesap** bölümünden şifrenizi değiştirin.
+1. `https://mumeatolye.com/yonetim` → giriş yapın → **Hesap** bölümünden şifrenizi değiştirin.
 2. **Site İçeriği** → WhatsApp numarası, telefon, e-posta, çalışma saatleri.
 3. Örnek ürün ve workshopları gerçek içerikle güncelleyin; workshop tarihlerini ekleyip “Yayında” işaretleyin.
 4. Kendi telefonunuzdan bir test siparişi ve bir test rezervasyonu yapın; WhatsApp mesajının doğru numaraya geldiğini görün,
    sonra bu kayıtları panelden “İptal” olarak işaretleyin.
-5. Google Search Console'a `mume.com` alanını ekleyin ve `https://mume.com/sitemap.xml` gönderin.
-6. Google İşletme Profili'nize web sitesi adresi olarak `https://mume.com` yazın; Instagram biyografisine de ekleyin.
+5. Google Search Console'a `mumeatolye.com` alanını ekleyin ve `https://mumeatolye.com/sitemap.xml` gönderin.
+6. Google İşletme Profili'nize web sitesi adresi olarak `https://mumeatolye.com` yazın; Instagram biyografisine de ekleyin.
 
 ## 8. Online ödeme (ileride)
 iyzico veya PayTR ile sözleşme yaptıktan sonra `src/lib/payments/README.md` dosyasındaki adımları izleyin.

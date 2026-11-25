@@ -8,7 +8,7 @@ COPY package.json package-lock.json* ./
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 FROM base AS build
-ARG SITE_URL=https://mume.com
+ARG SITE_URL=https://mumeatolye.com
 ENV SITE_URL=$SITE_URL NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

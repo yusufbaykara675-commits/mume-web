@@ -20,7 +20,7 @@ services:
     build:
       context: .
       args:
-        SITE_URL: ${SITE_URL:-https://mume.com}
+        SITE_URL: ${SITE_URL:-https://mumeatolye.com}
     restart: unless-stopped
     env_file: .env
     environment:

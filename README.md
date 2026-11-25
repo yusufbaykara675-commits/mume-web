@@ -68,4 +68,4 @@ public/brand/        logo ve paylaşım görselleri
 - [ ] Banner ve hikâye fotoğraflarını yükleyin
 - [ ] `/kvkk` metnindeki köşeli parantezli alanları doldurun ve bir hukukçuya kontrol ettirin (`src/app/(site)/kvkk/page.tsx`)
 - [ ] Yönetici şifresini panelden değiştirin
-- [ ] Google Search Console'a `https://mume.com/sitemap.xml` ekleyin
+- [ ] Google Search Console'a `https://mumeatolye.com/sitemap.xml` ekleyin
