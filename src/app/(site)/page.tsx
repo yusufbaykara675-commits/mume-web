@@ -79,7 +79,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative md:col-span-6 lg:col-span-7">
-            <div className="hero-fade relative aspect-[5/6] overflow-hidden rounded-[2rem] shadow-[var(--shadow-lift)] sm:aspect-[4/3] md:aspect-[5/6] lg:aspect-[6/5]" style={{ ["--d" as string]: "0.2s" }}>
+            <div className="hero-fade relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-[var(--shadow-lift)] md:aspect-[5/6] lg:aspect-[3/2]" style={{ ["--d" as string]: "0.2s" }}>
               <div className="kenburns absolute inset-0">
                 <Image src={home.heroImage} alt={home.heroImageAlt} fill priority sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" />
               </div>
@@ -101,14 +101,14 @@ export default async function HomePage() {
               ))}
             </div>
             <Link
-              href="/urunler?kategori=kisiye-ozel-mumlar"
+              href="/urunler?kategori=cicek-tasarimli-mumlar"
               className="hero-fade absolute -right-3 top-8 hidden w-40 rounded-2xl bg-ivory/95 p-2 shadow-[var(--shadow-lift)] backdrop-blur transition hover:-translate-y-1 lg:block xl:-right-8"
               style={{ ["--d" as string]: "0.9s" }}
             >
               <span className="relative block aspect-square overflow-hidden rounded-xl">
-                <Image src="/art/isimli-mum.svg" alt="" fill sizes="160px" className="object-cover" />
+                <Image src="/photos/cicek-bahcesi-kase.webp" alt="" fill sizes="160px" className="object-cover" />
               </span>
-              <span className="block px-1 pb-1 pt-2 text-xs font-semibold text-espresso">İsme özel mumlar →</span>
+              <span className="block px-1 pb-1 pt-2 text-xs font-semibold text-espresso">Çiçekli kase mumlar →</span>
             </Link>
             <div className="float-slow absolute -bottom-6 left-4 hidden rounded-2xl bg-ivory/95 px-5 py-4 shadow-[var(--shadow-soft)] backdrop-blur sm:block md:-left-8">
               <p className="flex items-center gap-2 text-sm font-semibold text-espresso">
@@ -185,7 +185,7 @@ export default async function HomePage() {
           </div>
           <div data-reveal="zoom" className="relative">
             <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-20px_rgb(0_0_0/0.45)]" data-parallax="0.06">
-              <Image src="/art/isimli-mum.svg" alt="İsim yazılı kişiye özel mum" fill sizes="(max-width: 768px) 90vw, 384px" className="object-cover" />
+              <Image src="/photos/papatya-kase.webp" alt="Papatya buketi kase mum" fill sizes="(max-width: 768px) 90vw, 384px" className="object-cover" />
             </div>
           </div>
         </div>

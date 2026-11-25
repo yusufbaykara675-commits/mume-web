@@ -14,7 +14,10 @@ export type ProductCardData = Prisma.ProductGetPayload<{ include: typeof product
 
 export async function getCategories(): Promise<Category[]> {
   if (!hasDatabase) return demoCategories;
-  return prisma.category.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }] });
+  return prisma.category.findMany({
+    where: { isActive: true, products: { some: { isActive: true } } },
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+  });
 }
 
 export async function getFeaturedProducts(limit = 8): Promise<ProductCardData[]> {

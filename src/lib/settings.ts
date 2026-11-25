@@ -55,15 +55,15 @@ export const settingSchemas = {
       .default(
         "Çiçeklerle bezenmiş, özenle dökülen, sevdiklerinize armağan edilmeye hazır el yapımı tasarım mumlar. Atölyemizde kendi mumunuzu tasarlamaya da davetlisiniz.",
       ),
-    heroImage: z.string().default("/art/hero.svg"),
-    heroImageAlt: z.string().default("MuMê atölyesinden el yapımı mumlar"),
+    heroImage: z.string().default("/photos/kus-mumlar.webp"),
+    heroImageAlt: z.string().default("MuMê atölyesinden kuş figürlü el yapımı mumlar"),
     storyTitle: z.string().default("Küçük bir atölyede, büyük bir özenle"),
     storyText: z
       .string()
       .default(
         "MuMê'de her mum elde dökülür, her çiçek tek tek yerleştirilir. Bir mumu yakmak; bir anı hatırlamak, bir sofrayı ısıtmak, birine \"seni düşündüm\" demektir.\n\nBu metin örnektir — yönetim panelindeki İçerik bölümünden kendi hikâyenizle değiştirin.",
       ),
-    storyImage: z.string().default("/art/hikaye.svg"),
+    storyImage: z.string().default("/photos/atolye-deniz-kizi.webp"),
     giftTitle: z.string().default("Hediyenin en sıcak hâli"),
     giftText: z
       .string()
@@ -81,7 +81,7 @@ export const settingSchemas = {
       .default(
         "Atölyemizde mumlarımızı tek tek elde döküyor, kurutulmuş çiçekler ve doğal dokularla süslüyoruz. Her parça birbirinden biraz farklı; çünkü el yapımı olanın güzelliği tam da buradadır.\n\nWorkshoplarımızda ise kapımızı herkese açıyoruz. Arkadaşlarınızla, ailenizle ya da tek başınıza gelip kendi mumunuzu tasarlıyor, sıcak bir ortamda üretmenin keyfini yaşıyorsunuz.\n\nBu sayfadaki metinler örnektir. Yönetim panelinde İçerik > Hakkımızda bölümünden kendi hikâyenizi yazabilirsiniz.",
       ),
-    image: z.string().default("/art/workshop.svg"),
+    image: z.string().default("/photos/isiltili-burgu.webp"),
     values: z
       .array(z.object({ title: z.string(), text: z.string() }))
       .default([
@@ -92,7 +92,18 @@ export const settingSchemas = {
   }),
   instagram: z.object({
     // Instagram API anahtarı gerektirmemesi için galeri elle yönetilir.
-    posts: z.array(z.object({ image: z.string(), url: z.string(), alt: z.string().default("") })).default([]),
+    posts: z
+      .array(z.object({ image: z.string(), url: z.string(), alt: z.string().default("") }))
+      .default(
+        [
+          ["heykel-mumlar", "Gözü bağlı kadın heykel mumlar"],
+          ["cicek-bahcesi-kase", "Çiçek bahçesi kase mum"],
+          ["tarot-gunes", "El boyaması tarot mum"],
+          ["kar-tanesi-kase", "Kar tanesi ve deniz kabuğu kase mum"],
+          ["deniz-jel-mumlar", "Deniz temalı jel mumlar"],
+          ["kaktus-mum", "Burgulu kaktüs mum"],
+        ].map(([img, alt]) => ({ image: `/photos/${img}.webp`, url: "https://www.instagram.com/mumeatolye/", alt })),
+      ),
   }),
   seo: z.object({
     homeDescription: z

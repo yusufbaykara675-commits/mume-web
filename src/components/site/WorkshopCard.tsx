@@ -9,7 +9,7 @@ export function WorkshopCard({ workshop }: { workshop: WorkshopWithSeats }) {
     <article className="card group grid overflow-hidden md:grid-cols-2">
       <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[360px]">
         <Image
-          src={workshop.coverImageUrl || "/art/workshop.svg"}
+          src={workshop.coverImageUrl || "/photos/tarot-gunes.webp"}
           alt={workshop.title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"

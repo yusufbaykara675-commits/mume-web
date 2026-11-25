@@ -18,15 +18,116 @@ const categories = [
   { name: "Özel Gün ve Organizasyon Mumları", slug: "ozel-gun-ve-organizasyon-mumlari", description: "Söz, nişan, doğum günü ve kurumsal organizasyonlar için." },
 ];
 
-const products = [
-  { name: "Çiçek Bahçesi Sütun Mum", cat: 0, img: "cicek-bahcesi", featured: true, colors: ["Krem", "Adaçayı yeşili"], fragrances: [] },
-  { name: "Lavanta Detaylı Kavanoz Mum", cat: 0, img: "lavanta-kavanoz", featured: true, colors: [], fragrances: ["Kokusuz", "Lavanta"] },
-  { name: "Dalgalı Form Dekoratif Mum", cat: 1, img: "dalgali-form", featured: true, colors: ["Krem", "Bej", "Kiremit"], fragrances: [] },
-  { name: "Kabartmalı Silindir Mum Seti", cat: 1, img: "kabartmali-set", featured: false, colors: ["Krem"], fragrances: [] },
-  { name: "İsimli Kişiye Özel Mum", cat: 2, img: "isimli-mum", featured: true, colors: ["Krem", "Pudra"], fragrances: [] },
-  { name: "Mini Hediyelik Mum Kutusu", cat: 3, img: "mini-kutu", featured: false, colors: [], fragrances: [] },
-  { name: "Öğretmenler Günü Hediye Mumu", cat: 3, img: "ogretmenler-gunu", featured: false, colors: [], fragrances: [] },
-  { name: "Söz & Nişan Masa Mumu", cat: 4, img: "soz-nisan", featured: false, colors: ["Beyaz", "Krem"], fragrances: [] },
+// Atölyenin gerçek ürün fotoğraflarından hazırlanan katalog (fiyatlar panelden girilir).
+// cat: 0 Çiçek Tasarımlı, 1 Dekoratif, 2 Kişiye Özel, 3 Hediyelik, 4 Özel Gün
+const products: {
+  name: string;
+  cat: number;
+  imgs: string[];
+  featured: boolean;
+  colors: string[];
+  short: string;
+  desc: string;
+}[] = [
+  {
+    name: "Kuş Figürlü Kabartma Mum",
+    cat: 1,
+    imgs: ["kus-mumlar"],
+    featured: true,
+    colors: ["Bordo", "Pudra pembe", "Zümrüt yeşili"],
+    short: "Gövdesi kabartma çiçek desenleriyle bezenmiş, kuş formunda el yapımı dekoratif mum.",
+    desc: "Kuş formunda dökülen bu mum, gövdesindeki ince kabartma çiçek ve kıvrım desenleriyle raflarınıza ve sofralarınıza zarif bir dokunuş katar.\n\nFotoğrafta bordo, pudra pembe ve zümrüt yeşili renkleri görüyorsunuz; farklı renk istekleriniz için bize yazabilirsiniz.",
+  },
+  {
+    name: "Gözü Bağlı Kadın Heykel Mum",
+    cat: 1,
+    imgs: ["heykel-mumlar"],
+    featured: true,
+    colors: ["Gri", "Lila", "Bakır"],
+    short: "Dalgalı saçları ve renkli göz bandıyla heykelsi, el yapımı dekoratif mum.",
+    desc: "Dalgalı saç kıvrımları ve renkli göz bandıyla heykel görünümlü bu mum, hem dekoratif bir obje hem de özel günler için anlamlı bir hediye.\n\nFotoğrafta gri, lila ve bakır tonları yer alıyor.",
+  },
+  {
+    name: "Kurutulmuş Çiçekli Sütun Mum",
+    cat: 0,
+    imgs: ["kuru-cicekli-sutun"],
+    featured: true,
+    colors: [],
+    short: "Renkli kurutulmuş çiçek ve yapraklarla bezenmiş beyaz sütun mum.",
+    desc: "Beyaz gövdesine yerleştirilen renk renk kurutulmuş çiçek ve yapraklar sayesinde her biri birbirinden farklı görünür. El yapımı olduğu için çiçeklerin dağılımı her mumda benzersizdir.",
+  },
+  {
+    name: "Çiçek Bahçesi Kase Mum",
+    cat: 0,
+    imgs: ["cicek-bahcesi-kase"],
+    featured: true,
+    colors: [],
+    short: "Cam kase içinde gül, şakayık ve papatya figürleriyle bezenmiş mum.",
+    desc: "Cam kasenin içinde, mumdan şekillendirilmiş gül, şakayık ve papatyalarla oluşturulmuş bir çiçek bahçesi. Sofranızda ya da masanızda göz alıcı bir dekor; sevdiklerinize şık bir hediye.",
+  },
+  {
+    name: "Papatya Buketi Kase Mum",
+    cat: 0,
+    imgs: ["papatya-kase"],
+    featured: false,
+    colors: [],
+    short: "Kabartmalı cam kase içinde papatya ve çiçek figürlü mum.",
+    desc: "Kabartmalı cam kase içinde, mumdan yapılmış papatya ve çiçek figürleriyle süslenmiş el yapımı mum. Hediye olarak da sevilen tasarımlarımızdan.",
+  },
+  {
+    name: "Kar Tanesi ve Deniz Kabuğu Kase Mum",
+    cat: 3,
+    imgs: ["kar-tanesi-kase"],
+    featured: false,
+    colors: [],
+    short: "Kar tanesi ve deniz kabuğu figürleriyle süslenmiş cam kase mum.",
+    desc: "Cam kase içinde, kar tanesi ve deniz kabuğu figürleriyle süslenmiş el yapımı mum. Yılbaşı ve kış hediyeleri için özel bir seçenek.",
+  },
+  {
+    name: "Işıltılı Burgu Sütun Mum",
+    cat: 1,
+    imgs: ["isiltili-burgu"],
+    featured: false,
+    colors: [],
+    short: "Mavi, mor ve altın tonlarında ışıltılı, burgu desenli sütun mum.",
+    desc: "Burgu desenli gövdesi mavi, mor ve altın tonlarında ışıltılı bir yüzeyle tamamlanmış dekoratif sütun mum. Işıltı sevenler için.",
+  },
+  {
+    name: "Burgulu Kaktüs Mum",
+    cat: 1,
+    imgs: ["kaktus-mum"],
+    featured: false,
+    colors: [],
+    short: "Yeşil, burgulu formuyla kaktüs görünümlü dekoratif mum.",
+    desc: "Yeşilin dinlendirici tonunda, burgulu dilimleriyle kaktüs görünümlü el yapımı dekoratif mum.",
+  },
+  {
+    name: "Deniz Temalı Jel Mum",
+    cat: 3,
+    imgs: ["deniz-jel-mumlar"],
+    featured: false,
+    colors: [],
+    short: "Cam kavanozda taşlar, deniz kabukları ve kuru dallarla deniz temalı jel mum.",
+    desc: "Şeffaf jel mumun içinde taşlar, deniz kabukları ve kuru dallarla küçük bir deniz dünyası. Cam kavanozda hazırlanır; hediye olarak sevilir.",
+  },
+  {
+    name: "Tarçınlı Jel Kavanoz Mum",
+    cat: 3,
+    imgs: ["tarcinli-jel-1", "tarcinli-jel-2"],
+    featured: false,
+    colors: [],
+    short: "Tarçın çubukları ve kurutulmuş çiçeklerle süslenmiş, ip sargılı jel kavanoz mum.",
+    desc: "Şeffaf jel mumun içinde tarçın çubukları ve çiçek yaprakları; kavanozun ağzı jüt iple sarılıp kurutulmuş çiçekle tamamlanır.",
+  },
+  {
+    name: "El Boyaması Tarot Mum — Güneş",
+    cat: 2,
+    imgs: ["tarot-gunes"],
+    featured: false,
+    colors: [],
+    short: "Güneş kartı tasarımıyla elde boyanmış dekoratif mum.",
+    desc: "Güneş tarot kartından ilham alınarak tek tek elde boyanan dekoratif mum. El işçiliği olduğu için her biri biraz farklıdır.",
+  },
 ];
 
 function slugify(s: string) {
@@ -72,28 +173,49 @@ async function main() {
   }
   console.log(`✔ ${categories.length} kategori hazır`);
 
-  // 3) Örnek ürünler (yalnızca hiç ürün yoksa)
-  if ((await prisma.product.count()) === 0) {
-    for (const p of products) {
-      await prisma.product.create({
-        data: {
-          name: p.name,
-          slug: slugify(p.name),
-          shortDescription: "Örnek ürün açıklaması — yönetim panelinden düzenleyin.",
-          description:
-            "Bu bir örnek üründür. Gerçek ürün açıklamanızı, ölçülerini, yanma süresini ve kullanım önerilerini yönetim panelindeki Ürünler bölümünden ekleyin.\n\nFiyat girilmediği için sitede \"Fiyat için yazın\" olarak görünür.",
-          priceCents: null,
-          stock: null,
-          colors: p.colors,
-          fragrances: p.fragrances,
-          isFeatured: p.featured,
-          isSample: true,
-          categoryId: catIds[p.cat],
-          images: { create: [{ url: `/art/${p.img}.svg`, alt: p.name, sortOrder: 0 }] },
-        },
-      });
+  // 3) Ürünler — örnek ürünler varsa (veya hiç ürün yoksa) gerçek fotoğraflı katalogla değiştirilir.
+  //    Panelden düzenlenmiş ürünlere dokunulmaz (kaydedilen ürünün örnek işareti kalkar).
+  const catalogFlag = await prisma.siteSetting.findUnique({ where: { key: "migration_catalog_v2" } });
+  if (!catalogFlag) {
+    const removed = await prisma.product.deleteMany({ where: { isSample: true } });
+    const remaining = await prisma.product.count();
+    if (removed.count > 0 || remaining === 0) {
+      for (const p of products) {
+        const slug = slugify(p.name);
+        if (await prisma.product.findUnique({ where: { slug } })) continue;
+        await prisma.product.create({
+          data: {
+            name: p.name,
+            slug,
+            shortDescription: p.short,
+            description: p.desc,
+            priceCents: null,
+            stock: null,
+            colors: p.colors,
+            fragrances: [],
+            isFeatured: p.featured,
+            isSample: false,
+            categoryId: catIds[p.cat],
+            images: { create: p.imgs.map((img, i) => ({ url: `/photos/${img}.webp`, alt: p.name, sortOrder: i })) },
+          },
+        });
+      }
+      console.log(`✔ Fotoğraflı katalog oluşturuldu (${products.length} ürün)`);
     }
-    console.log(`✔ ${products.length} örnek ürün eklendi`);
+    // Örnek workshop görsellerini gerçek fotoğraflarla değiştir
+    await prisma.workshop.updateMany({
+      where: { isSample: true },
+      data: { coverImageUrl: "/photos/tarot-gunes.webp", gallery: ["/photos/atolye-deniz-kizi.webp", "/photos/kuru-cicekli-sutun.webp"] },
+    });
+    // Ana sayfa ayarları kaydedilmişse ve hâlâ çizim görseller kullanılıyorsa fotoğraflarla değiştir
+    const home = await prisma.siteSetting.findUnique({ where: { key: "home" } });
+    if (home && typeof home.value === "object" && home.value) {
+      const v = { ...(home.value as Record<string, unknown>) };
+      if (String(v.heroImage ?? "").startsWith("/art/")) v.heroImage = "/photos/kus-mumlar.webp";
+      if (String(v.storyImage ?? "").startsWith("/art/")) v.storyImage = "/photos/atolye-deniz-kizi.webp";
+      await prisma.siteSetting.update({ where: { key: "home" }, data: { value: v as unknown as import("@prisma/client").Prisma.InputJsonValue } });
+    }
+    await prisma.siteSetting.create({ data: { key: "migration_catalog_v2", value: { at: new Date().toISOString() } } });
   }
 
   // 4) Örnek workshop (oturumları kapalı — tarih eklenince yayına alınır)
@@ -111,8 +233,8 @@ async function main() {
         durationMinutes: 120,
         priceCents: null,
         includes: ["Örnek madde: Tüm malzemeler atölye tarafından sağlanır", "Örnek madde: Yaptığınız mumu yanınızda götürürsünüz"],
-        coverImageUrl: "/art/workshop.svg",
-        gallery: ["/art/kabartmali-set.svg", "/art/lavanta-kavanoz.svg"],
+        coverImageUrl: "/photos/tarot-gunes.webp",
+        gallery: ["/photos/atolye-deniz-kizi.webp", "/photos/kuru-cicekli-sutun.webp"],
         isSample: true,
         sessions: {
           create: [
