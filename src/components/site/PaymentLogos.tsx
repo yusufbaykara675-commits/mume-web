@@ -1,27 +1,31 @@
 import Image from "next/image";
 
+/** iyzico resmî logo paketinden: iyzico ile Öde, Mastercard, Visa, American Express, Troy. */
+export const DEFAULT_PAYMENT_LOGOS = "/payment/logo-band.png";
+
 /**
- * iyzico'nun istediği "iyzico ile Öde", Visa ve Mastercard logoları.
- * Resmî logo bandı yönetim panelinden (İçerik > Yasal metinler ve ödeme) yüklenir.
- * Yüklenmemişse yalnızca yazı olarak gösterilir — logolar elle çizilmez,
- * marka kuralları gereği resmî dosyalar kullanılmalıdır.
+ * iyzico'nun web sitesinde istediği ödeme logoları bandı.
+ * Panelden farklı bir bant yüklenmediyse resmî paketteki bant gösterilir.
+ * Şeffaf PNG koyu zeminde okunmadığı için beyaz bir kutu içinde gösterilir.
  */
-export function PaymentLogos({ src, tone = "dark" }: { src: string; tone?: "dark" | "light" }) {
-  if (src) {
-    return (
-      <div className={`relative h-8 w-64 ${tone === "dark" ? "rounded-md bg-white/95 px-2" : ""}`}>
-        <Image src={src} alt="iyzico ile Öde, Visa ve Mastercard" fill sizes="256px" className="object-contain" />
-      </div>
-    );
-  }
-  const pill = tone === "dark" ? "border-cream/25 text-cream/80" : "border-sand text-ink/70";
+export function PaymentLogos({ src }: { src?: string }) {
+  const custom = src && src !== DEFAULT_PAYMENT_LOGOS;
   return (
-    <ul className="flex flex-wrap items-center gap-2" aria-label="Ödeme yöntemleri">
-      {["iyzico ile Öde", "Visa", "Mastercard"].map((l) => (
-        <li key={l} className={`rounded-md border px-2.5 py-1 text-[11px] font-semibold tracking-wide ${pill}`}>
-          {l}
-        </li>
-      ))}
-    </ul>
+    <div className="inline-flex items-center rounded-lg bg-white px-3 py-2 shadow-sm">
+      {custom ? (
+        <div className="relative h-7 w-[300px] max-w-full">
+          <Image src={src} alt="Ödeme yöntemleri: iyzico ile Öde, Mastercard, Visa" fill sizes="300px" className="object-contain" />
+        </div>
+      ) : (
+        <Image
+          src={DEFAULT_PAYMENT_LOGOS}
+          alt="Ödeme yöntemleri: iyzico ile Öde, Mastercard, Visa, American Express, Troy"
+          width={1287}
+          height={96}
+          sizes="(min-width: 768px) 360px, 80vw"
+          className="h-auto w-[300px] max-w-full md:w-[360px]"
+        />
+      )}
+    </div>
   );
 }

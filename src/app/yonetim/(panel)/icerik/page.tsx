@@ -8,6 +8,7 @@ import { DEFAULT_LEGAL_TEXTS, LEGAL_PAGES, legalText, type LegalSlug } from "@/l
 import { prisma } from "@/lib/db";
 import { hasDatabase } from "@/lib/demo";
 import { ImageInput } from "@/components/admin/ImageInput";
+import { DEFAULT_PAYMENT_LOGOS } from "@/components/site/PaymentLogos";
 
 export const metadata = { title: "Site İçeriği" };
 
@@ -34,7 +35,7 @@ export default async function ContentPage() {
     [Boolean(legal.sellerTitle), "Satıcı adı soyadı / şirket unvanı girildi"],
     [Boolean(legal.taxOffice && legal.taxNumber), "Vergi dairesi ve numarası girildi"],
     [Boolean(business.phone && business.email), "Telefon ve e-posta girildi (İşletme bilgileri)"],
-    [Boolean(legal.paymentLogos), "iyzico ile Öde / Visa / Mastercard logo bandı yüklendi"],
+    [true, "iyzico ile Öde / Mastercard / Visa logo bandı sitenin altında gösteriliyor"],
     [unfilled.length === 0, unfilled.length ? `Doldurulmamış [ ] alanlar var: ${unfilled.map((s) => LEGAL_PAGES[s].title).join(", ")}` : "Yasal metinlerdeki tüm [ ] alanlar dolduruldu"],
     [true, "Gizlilik, Mesafeli Satış, Teslimat ve İade, Hakkımızda, İletişim sayfaları yayında"],
     [true, "SSL sertifikası (https) etkin"],
@@ -225,26 +226,22 @@ export default async function ContentPage() {
 
               <div className="grid items-end gap-5 sm:grid-cols-[260px_1fr]">
                 <div className="flex h-12 items-center justify-center rounded-lg border border-sand bg-white px-2">
-                  {legal.paymentLogos ? (
-                    <div className="relative h-8 w-full">
-                      <Image src={legal.paymentLogos} alt="" fill sizes="260px" className="object-contain" />
-                    </div>
-                  ) : (
-                    <span className="text-xs text-ink/50">Logo bandı yüklenmedi</span>
-                  )}
+                  <div className="relative h-8 w-full">
+                    <Image src={legal.paymentLogos || DEFAULT_PAYMENT_LOGOS} alt="" fill sizes="260px" className="object-contain" />
+                  </div>
                 </div>
                 <label className="block">
-                  <span className="label">iyzico logo bandı (PNG, şeffaf arka plan)</span>
+                  <span className="label">Farklı bir logo bandı yükle (isteğe bağlı, PNG)</span>
                   <input type="file" name="paymentLogosFile" accept="image/png,image/webp,image/jpeg" className={fileClass} />
                   <span className="mt-1 block text-xs text-ink/55">
-                    iyzico&apos;nun resmî logo paketinden &quot;iyzico ile Öde – Visa – Mastercard&quot; bant görselini yükleyin:{" "}
+                    Şu an iyzico&apos;nun resmî logo bandı kullanılıyor. Değiştirmek gerekmez; güncel paket için:{" "}
                     <a href="https://docs.iyzico.com/ek-bilgiler/iyzico-logo-paketi" target="_blank" rel="noopener noreferrer" className="text-terracotta underline">
                       logo paketini indir
                     </a>
                   </span>
                 </label>
               </div>
-              {legal.paymentLogos && <Checkbox name="removePaymentLogos" label="Logo bandını kaldır" />}
+              {legal.paymentLogos && legal.paymentLogos !== DEFAULT_PAYMENT_LOGOS && <Checkbox name="removePaymentLogos" label="Yüklediğim bandı kaldır (resmî banda dön)" />}
 
               <p className="text-sm text-ink/65">
                 Metinlerde <strong>[köşeli parantez]</strong> içindeki kısımları kendi bilgilerinizle değiştirin. <code>{"{{SATICI}}"}</code>,{" "}

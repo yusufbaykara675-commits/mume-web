@@ -251,6 +251,19 @@ async function main() {
     });
     console.log("✔ Örnek workshop eklendi (oturumlar kapalı)");
   }
+
+  // 5) Geçici fiyatlar — işletme sahibinin isteğiyle fiyatı boş ürünlere 400–900 TL arası (50'nin katı)
+  //    rastgele fiyat verilir. Bir kez çalışır; panelden girilen fiyatlara dokunmaz.
+  const priceFlag = await prisma.siteSetting.findUnique({ where: { key: "migration_prices_v1" } });
+  if (!priceFlag) {
+    const unpriced = await prisma.product.findMany({ where: { priceCents: null }, select: { id: true } });
+    for (const p of unpriced) {
+      const lira = 400 + 50 * Math.floor(Math.random() * 11); // 400, 450, …, 900
+      await prisma.product.update({ where: { id: p.id }, data: { priceCents: lira * 100 } });
+    }
+    await prisma.siteSetting.create({ data: { key: "migration_prices_v1", value: { at: new Date().toISOString(), count: unpriced.length } } });
+    console.log(`✔ ${unpriced.length} ürüne geçici fiyat verildi (400–900 TL)`);
+  }
 }
 
 main()
