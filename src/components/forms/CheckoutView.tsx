@@ -37,6 +37,7 @@ export function CheckoutView({
     defaultValues: {
       deliveryMethod: "KARGO",
       kvkkConsent: false,
+      contractsConsent: false,
       marketingConsent: false,
       startedAt: Date.now(),
       website: "",
@@ -215,6 +216,20 @@ export function CheckoutView({
           </Field>
 
           <div className="space-y-3 rounded-xl bg-cream/60 p-4">
+            <div>
+              <label className="flex items-start gap-3 text-sm leading-relaxed text-ink/80">
+                <input type="checkbox" className="mt-1 h-4 w-4 flex-none accent-terracotta" {...register("contractsConsent")} />
+                <span>
+                  <Link href="/on-bilgilendirme-formu" target="_blank" className="font-medium text-terracotta underline underline-offset-2">Ön Bilgilendirme Formu</Link>
+                  &apos;nu ve{" "}
+                  <Link href="/mesafeli-satis-sozlesmesi" target="_blank" className="font-medium text-terracotta underline underline-offset-2">Mesafeli Satış Sözleşmesi</Link>
+                  &apos;ni okudum, kabul ediyorum.
+                </span>
+              </label>
+              {errors.contractsConsent?.message && (
+                <p className="field-error" role="alert">{errors.contractsConsent.message}</p>
+              )}
+            </div>
             <KvkkCheckbox register={register("kvkkConsent")} error={errors.kvkkConsent} purpose="siparişimin alınması ve teslimatı" />
             <label className="flex items-start gap-3 text-sm text-ink/70">
               <input type="checkbox" className="mt-1 h-4 w-4 flex-none accent-terracotta" {...register("marketingConsent")} />

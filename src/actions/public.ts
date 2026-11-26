@@ -71,6 +71,7 @@ export async function createOrder(
 
   const f = form.data;
   const isCargo = f.deliveryMethod === "KARGO";
+  const legal = await getSetting("legal");
   let order;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
@@ -90,6 +91,8 @@ export async function createOrder(
           marketingConsent: Boolean(f.marketingConsent),
           consentTextVersion: KVKK_TEXT_VERSION,
           consentAt: new Date(),
+          contractsConsent: true,
+          contractsVersion: legal.version,
           items: { create: lines },
         },
         include: { items: true },

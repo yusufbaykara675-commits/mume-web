@@ -105,6 +105,26 @@ export const settingSchemas = {
         ].map(([img, alt]) => ({ image: `/photos/${img}.webp`, url: "https://www.instagram.com/mumeatolye/", alt })),
       ),
   }),
+  legal: z.object({
+    // Satıcı bilgileri — sözleşmelerde ve site altbilgisinde gösterilir.
+    sellerTitle: z.string().default(""),
+    taxOffice: z.string().default(""),
+    taxNumber: z.string().default(""),
+    mersisNumber: z.string().default(""),
+    // iyzico'nun resmî logo paketindeki "iyzico ile Öde / Visa / Mastercard" bant görseli.
+    paymentLogos: z.string().default(""),
+    // Sözleşme metinleri değiştiğinde güncellenir; siparişte hangi sürümün onaylandığı kaydedilir.
+    version: z.string().default("varsayilan-2026-11"),
+    // Boş bırakılan metin yerine src/lib/legal.ts içindeki şablon gösterilir.
+    texts: z
+      .object({
+        preInfo: z.string().default(""),
+        distanceSales: z.string().default(""),
+        deliveryReturns: z.string().default(""),
+        privacy: z.string().default(""),
+      })
+      .default({}),
+  }),
   seo: z.object({
     homeDescription: z
       .string()

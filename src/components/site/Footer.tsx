@@ -4,8 +4,10 @@ import type { Settings } from "@/lib/settings";
 import { mapsLink } from "@/lib/settings";
 import { whatsappLink } from "@/lib/whatsapp";
 import { t } from "@/i18n";
+import { LEGAL_PAGES, type LegalSlug } from "@/lib/legal";
+import { PaymentLogos } from "./PaymentLogos";
 
-export function Footer({ business, hours }: { business: Settings["business"]; hours: Settings["hours"] }) {
+export function Footer({ business, hours, legal }: { business: Settings["business"]; hours: Settings["hours"]; legal: Settings["legal"] }) {
   const wa = whatsappLink(business.whatsapp, "Merhaba MuMê, bilgi almak istiyorum.");
   return (
     <footer className="mt-24 bg-espresso text-cream">
@@ -68,12 +70,27 @@ export function Footer({ business, hours }: { business: Settings["business"]; ho
         </div>
       </div>
       <div className="border-t border-cream/10">
-        <div className="container-page flex flex-col gap-3 py-6 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {business.name}. {t.footer.rights}</p>
-          <div className="flex gap-5">
+        <div className="container-page flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
+          <nav aria-label="Yasal bilgiler" className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-cream/70">
+            {(Object.keys(LEGAL_PAGES) as LegalSlug[]).map((s) => (
+              <Link key={s} href={`/${s}`} className="hover:text-flame">{LEGAL_PAGES[s].title}</Link>
+            ))}
             <Link href="/kvkk" className="hover:text-flame">{t.footer.kvkk}</Link>
             <Link href="/cerez-politikasi" className="hover:text-flame">{t.footer.cookies}</Link>
-          </div>
+          </nav>
+          <PaymentLogos src={legal.paymentLogos} />
+        </div>
+      </div>
+      <div className="border-t border-cream/10">
+        <div className="container-page flex flex-col gap-2 py-5 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} {business.name}. {t.footer.rights}</p>
+          {(legal.sellerTitle || legal.taxNumber) && (
+            <p>
+              {[legal.sellerTitle, [legal.taxOffice, legal.taxNumber].filter(Boolean).join(" V.D. / "), legal.mersisNumber && `MERSİS: ${legal.mersisNumber}`]
+                .filter(Boolean)
+                .join(" · ")}
+            </p>
+          )}
         </div>
       </div>
     </footer>

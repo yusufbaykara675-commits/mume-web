@@ -12,13 +12,13 @@ import { localBusinessJsonLd } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const { business, hours, home } = await getSettings(["business", "hours", "home"]);
+  const { business, hours, home, legal } = await getSettings(["business", "hours", "home", "legal"]);
   return (
     <CartProvider>
       <ScrollEffects />
       <Header announcement={home.announcement} />
       <main id="icerik">{children}</main>
-      <Footer business={business} hours={hours} />
+      <Footer business={business} hours={hours} legal={legal} />
       <CartDrawer />
       <CookieNotice />
       <JsonLd data={localBusinessJsonLd(business, hours)} />

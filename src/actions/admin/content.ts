@@ -6,6 +6,7 @@ import { requireAdmin } from "@/lib/auth";
 import { getSetting, saveSetting } from "@/lib/settings";
 import { deleteImage, saveImage } from "@/lib/storage";
 import { normalizeWhatsapp } from "@/lib/whatsapp";
+import { DEFAULT_LEGAL_TEXTS, type LegalTextKey } from "@/lib/legal";
 import { bool, files, FormError, int, str, toErrorState, type ActionState } from "@/lib/form-data";
 
 const DAYS = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
@@ -173,4 +174,48 @@ export async function deleteTestimonial(fd: FormData) {
   await requireAdmin();
   await prisma.testimonial.delete({ where: { id: str(fd, "id", 40) } });
   revalidatePath("/", "layout");
+}
+
+export async function saveLegal(_prev: ActionState, fd: FormData): Promise<ActionState> {
+  await requireAdmin();
+  try {
+    const current = await getSetting("legal");
+    let paymentLogos = await replaceImage(fd, "paymentLogosFile", current.paymentLogos, "odeme");
+    if (bool(fd, "removePaymentLogos") && !files(fd, "paymentLogosFile").length) {
+      await deleteImage(current.paymentLogos);
+      paymentLogos = "";
+    }
+    // Şablonla aynı bırakılan metin boş kaydedilir; böylece şablon güncellemeleri otomatik yansır.
+    const norm = (v: string) => v.replace(/\r\n/g, "\n").trim();
+    const text = (key: LegalTextKey) => {
+      const v = norm(str(fd, key, 30000));
+      return v === norm(DEFAULT_LEGAL_TEXTS[key]) ? "" : v;
+    };
+    const texts = {
+      preInfo: text("preInfo"),
+      distanceSales: text("distanceSales"),
+      deliveryReturns: text("deliveryReturns"),
+      privacy: text("privacy"),
+    };
+    const sellerTitle = str(fd, "sellerTitle", 160);
+    const taxOffice = str(fd, "taxOffice", 80);
+    const taxNumber = str(fd, "taxNumber", 20);
+    if (taxNumber && !/^\d{10,11}$/.test(taxNumber)) throw new FormError("Vergi numarası 10 haneli (şirket) veya 11 haneli (şahıs/TCKN) olmalı.");
+    const mersisNumber = str(fd, "mersisNumber", 20);
+    if (mersisNumber && !/^\d{16}$/.test(mersisNumber)) throw new FormError("MERSİS numarası 16 haneli olmalı.");
+
+    // Metin veya satıcı bilgisi değiştiyse yeni sürüm: siparişlerde hangi metnin onaylandığı izlenebilir.
+    const changed =
+      JSON.stringify(texts) !== JSON.stringify(current.texts) ||
+      sellerTitle !== current.sellerTitle ||
+      taxOffice !== current.taxOffice ||
+      taxNumber !== current.taxNumber ||
+      mersisNumber !== current.mersisNumber;
+    const version = changed ? new Date().toISOString().slice(0, 16).replace("T", " ") : current.version;
+
+    await saveSetting("legal", { sellerTitle, taxOffice, taxNumber, mersisNumber, paymentLogos, version, texts });
+    return done("Yasal bilgiler ve ödeme logoları kaydedildi.");
+  } catch (err) {
+    return toErrorState(err);
+  }
 }

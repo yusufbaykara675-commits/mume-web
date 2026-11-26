@@ -54,7 +54,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
               {order.address && <div className="sm:col-span-2"><dt className="text-ink/55">Adres</dt><dd className="whitespace-pre-line">{order.address}{order.city ? `\n${order.city}` : ""}</dd></div>}
               {order.note && <div className="sm:col-span-2"><dt className="text-ink/55">Müşteri notu</dt><dd className="whitespace-pre-line rounded-lg bg-cream p-3">{order.note}</dd></div>}
               <div className="sm:col-span-2 text-xs text-ink/55">
-                KVKK onayı: {order.kvkkConsent ? "Var" : "Yok"} (sürüm {order.consentTextVersion}) · Duyuru izni: {order.marketingConsent ? "Var" : "Yok"}
+                KVKK onayı: {order.kvkkConsent ? "Var" : "Yok"} (sürüm {order.consentTextVersion}) · Sözleşme onayı: {order.contractsConsent ? `Var (sürüm ${order.contractsVersion ?? "—"})` : "Yok"} · Duyuru izni: {order.marketingConsent ? "Var" : "Yok"}
               </div>
             </dl>
             {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-5 px-5! py-2.5!">Müşteriye WhatsApp&apos;tan yaz</a>}

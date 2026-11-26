@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getSettings } from "@/lib/settings";
-import { addInstagramPost, removeInstagramPost, saveAbout, saveBusiness, saveHome, saveHours } from "@/actions/admin/content";
+import { addInstagramPost, removeInstagramPost, saveAbout, saveBusiness, saveHome, saveHours, saveLegal } from "@/actions/admin/content";
 import { AdminForm, ConfirmSubmit, SubmitButton } from "@/components/admin/AdminForm";
-import { Input, PageHeader, Panel, Textarea } from "@/components/admin/ui";
+import { Checkbox, Input, PageHeader, Panel, Textarea } from "@/components/admin/ui";
+import { DEFAULT_LEGAL_TEXTS, LEGAL_PAGES, legalText, type LegalSlug } from "@/lib/legal";
+import { prisma } from "@/lib/db";
+import { hasDatabase } from "@/lib/demo";
 import { ImageInput } from "@/components/admin/ImageInput";
 
 export const metadata = { title: "Site İçeriği" };
@@ -17,10 +20,25 @@ const sections = [
   ["anasayfa", "Ana sayfa & banner"],
   ["hakkimizda", "Hakkımızda"],
   ["instagram", "Instagram galerisi"],
+  ["yasal", "Yasal metinler & iyzico"],
 ] as const;
 
 export default async function ContentPage() {
-  const { business, hours, home, about, instagram, seo } = await getSettings(["business", "hours", "home", "about", "instagram", "seo"]);
+  const { business, hours, home, about, instagram, seo, legal } = await getSettings(["business", "hours", "home", "about", "instagram", "seo", "legal"]);
+  const pricedProducts = hasDatabase ? await prisma.product.count({ where: { isActive: true, priceCents: { not: null } } }) : 0;
+  const activeProducts = hasDatabase ? await prisma.product.count({ where: { isActive: true } }) : 0;
+  const slugs = Object.keys(LEGAL_PAGES) as LegalSlug[];
+  const unfilled = slugs.filter((s) => /\[[^\]]+\]/.test(legalText(LEGAL_PAGES[s].key, business, legal)));
+  const checklist: [boolean, string][] = [
+    [activeProducts > 0 && pricedProducts === activeProducts, `Tüm ürünlerde fiyat var (${pricedProducts}/${activeProducts})`],
+    [Boolean(legal.sellerTitle), "Satıcı adı soyadı / şirket unvanı girildi"],
+    [Boolean(legal.taxOffice && legal.taxNumber), "Vergi dairesi ve numarası girildi"],
+    [Boolean(business.phone && business.email), "Telefon ve e-posta girildi (İşletme bilgileri)"],
+    [Boolean(legal.paymentLogos), "iyzico ile Öde / Visa / Mastercard logo bandı yüklendi"],
+    [unfilled.length === 0, unfilled.length ? `Doldurulmamış [ ] alanlar var: ${unfilled.map((s) => LEGAL_PAGES[s].title).join(", ")}` : "Yasal metinlerdeki tüm [ ] alanlar dolduruldu"],
+    [true, "Gizlilik, Mesafeli Satış, Teslimat ve İade, Hakkımızda, İletişim sayfaları yayında"],
+    [true, "SSL sertifikası (https) etkin"],
+  ];
   return (
     <div>
       <PageHeader title="Site İçeriği" text="Sitedeki metinler, iletişim bilgileri, çalışma saatleri ve görseller" />
@@ -177,6 +195,80 @@ export default async function ContentPage() {
             ) : (
               <p className="text-sm text-ink/60">Galeri boş. Boşken ana sayfada Instagram hesabınıza giden bir kart gösterilir.</p>
             )}
+          </Panel>
+        </section>
+
+        <section id="yasal" className="scroll-mt-6">
+          <Panel title="iyzico başvuru kontrol listesi">
+            <ul className="space-y-2 text-sm">
+              {checklist.map(([ok, label]) => (
+                <li key={label} className="flex items-start gap-2">
+                  <span className={ok ? "text-olive" : "text-terracotta"} aria-hidden>{ok ? "✓" : "○"}</span>
+                  <span className={ok ? "text-ink/70" : "font-medium text-espresso"}>{label}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs text-ink/55">
+              iyzico ayrıca sattığınız ürünler için gerekli izin ve belgeleri, başvuru sırasında vergi levhası ve kimlik/imza belgelerini ister.
+              Online ödeme sözleşme ve teknik entegrasyon tamamlanana kadar kapalı kalır.
+            </p>
+          </Panel>
+
+          <Panel title="Yasal metinler ve ödeme logoları" className="mt-6">
+            <AdminForm action={saveLegal}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Input label="Satıcı adı soyadı / şirket unvanı" name="sellerTitle" defaultValue={legal.sellerTitle} className="sm:col-span-2" hint="Vergi levhasındaki unvanla aynı olmalı." />
+                <Input label="Vergi dairesi" name="taxOffice" defaultValue={legal.taxOffice} placeholder="Van Vergi Dairesi" />
+                <Input label="Vergi numarası / TCKN" name="taxNumber" defaultValue={legal.taxNumber} inputMode="numeric" />
+                <Input label="MERSİS numarası (şirketse)" name="mersisNumber" defaultValue={legal.mersisNumber} inputMode="numeric" />
+              </div>
+
+              <div className="grid items-end gap-5 sm:grid-cols-[260px_1fr]">
+                <div className="flex h-12 items-center justify-center rounded-lg border border-sand bg-white px-2">
+                  {legal.paymentLogos ? (
+                    <div className="relative h-8 w-full">
+                      <Image src={legal.paymentLogos} alt="" fill sizes="260px" className="object-contain" />
+                    </div>
+                  ) : (
+                    <span className="text-xs text-ink/50">Logo bandı yüklenmedi</span>
+                  )}
+                </div>
+                <label className="block">
+                  <span className="label">iyzico logo bandı (PNG, şeffaf arka plan)</span>
+                  <input type="file" name="paymentLogosFile" accept="image/png,image/webp,image/jpeg" className={fileClass} />
+                  <span className="mt-1 block text-xs text-ink/55">
+                    iyzico&apos;nun resmî logo paketinden &quot;iyzico ile Öde – Visa – Mastercard&quot; bant görselini yükleyin:{" "}
+                    <a href="https://docs.iyzico.com/ek-bilgiler/iyzico-logo-paketi" target="_blank" rel="noopener noreferrer" className="text-terracotta underline">
+                      logo paketini indir
+                    </a>
+                  </span>
+                </label>
+              </div>
+              {legal.paymentLogos && <Checkbox name="removePaymentLogos" label="Logo bandını kaldır" />}
+
+              <p className="text-sm text-ink/65">
+                Metinlerde <strong>[köşeli parantez]</strong> içindeki kısımları kendi bilgilerinizle değiştirin. <code>{"{{SATICI}}"}</code>,{" "}
+                <code>{"{{ADRES}}"}</code>, <code>{"{{TELEFON}}"}</code>, <code>{"{{EPOSTA}}"}</code>, <code>{"{{VERGI}}"}</code> gibi etiketler
+                otomatik doldurulur. Başlık için satır başına &quot;## &quot;, madde için &quot;- &quot; yazın. Metni tamamen silerseniz şablon geri gelir.
+                Bu metinler şablondur; yayına almadan önce bir hukuk danışmanına kontrol ettirmeniz önerilir.
+              </p>
+              {slugs.map((s) => {
+                const key = LEGAL_PAGES[s].key;
+                return (
+                  <Textarea
+                    key={s}
+                    label={LEGAL_PAGES[s].title}
+                    name={key}
+                    rows={12}
+                    defaultValue={legal.texts[key] || DEFAULT_LEGAL_TEXTS[key]}
+                    hint={`Sitede: /${s}`}
+                    className="input font-mono text-xs!"
+                  />
+                );
+              })}
+              <p className="text-xs text-ink/55">Şu anki sürüm: {legal.version}. Metni değiştirdiğinizde yeni sürüm oluşur ve siparişlerde hangi sürümün onaylandığı kaydedilir.</p>
+              <SubmitButton>Kaydet</SubmitButton>
+            </AdminForm>
           </Panel>
         </section>
 

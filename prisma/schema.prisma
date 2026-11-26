@@ -139,6 +139,9 @@ model Order {
   marketingConsent   Boolean        @default(false)
   consentTextVersion String
   consentAt          DateTime
+  // Ön Bilgilendirme Formu + Mesafeli Satış Sözleşmesi onayı ve onaylanan metin sürümü
+  contractsConsent   Boolean        @default(false)
+  contractsVersion   String?
   adminNote          String?
   items              OrderItem[]
   createdAt          DateTime       @default(now())

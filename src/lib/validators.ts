@@ -41,6 +41,9 @@ export const checkoutSchema = z
     address: z.string().trim().max(400).optional().or(z.literal("")),
     note: z.string().trim().max(600).optional().or(z.literal("")),
     kvkkConsent: kvkk,
+    contractsConsent: z
+      .boolean()
+      .refine((v) => v === true, "Siparişi tamamlamak için Ön Bilgilendirme Formu'nu ve Mesafeli Satış Sözleşmesi'ni onaylamanız gerekir."),
     marketingConsent: z.boolean().optional(),
     ...antiSpam,
   })

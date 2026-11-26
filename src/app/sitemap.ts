@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       prisma.category.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } }),
     ]);
   }
-  const staticPages = ["", "/urunler", "/workshoplar", "/hakkimizda", "/iletisim", "/kvkk", "/cerez-politikasi"].map((p) => ({
+  const staticPages = ["", "/urunler", "/workshoplar", "/hakkimizda", "/iletisim", "/kvkk", "/cerez-politikasi", "/gizlilik-politikasi", "/mesafeli-satis-sozlesmesi", "/on-bilgilendirme-formu", "/teslimat-ve-iade"].map((p) => ({
     url: `${SITE_URL}${p}`,
     changeFrequency: "weekly" as const,
     priority: p === "" ? 1 : 0.7,
